@@ -1,0 +1,22 @@
+{
+  "name": "conductor",
+  "displayName": "Conductor",
+  "description": "Orchestrate a single design→delivery effort with a team of subagents — investigate, align, implement in an isolated worktree, run an autonomous QA loop, then integrate. Project-specific knowledge (gates, conventions, codegen, visual QA) is discovered once by `init` and persisted to a committed .conductor/ profile, so the same flow runs in any repo.",
+  "version": "0.1.0",
+  "author": {
+    "name": "JP Grusling",
+    "url": "https://github.com/jpgrusling"
+  },
+  "homepage": "https://github.com/jpgrusling/claude-plugins/tree/main/plugins/conductor",
+  "repository": "https://github.com/jpgrusling/claude-plugins",
+  "license": "MIT",
+  "keywords": [
+    "workflow",
+    "orchestration",
+    "subagents",
+    "delivery",
+    "code-review",
+    "worktree",
+    "figma"
+  ]
+}

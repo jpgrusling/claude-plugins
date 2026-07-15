@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "trunk": "main",
+  "packageManager": "pnpm",
+  "taskRunner": "turbo",
+  "gates": {
+    "lint": "pnpm run lint",
+    "format": "pnpm run format",
+    "formatWrite": "pnpm run format:write",
+    "typecheck": "pnpm run typecheck",
+    "build": "pnpm run build",
+    "test": "pnpm run test"
+  },
+  "protected": ["**/.env*", "**/*.gen.ts"],
+  "planDir": ".conductor/plans",
+  "codegen": {
+    "needed": true,
+    "command": "pnpm run generate:schema && pnpm run generate:types",
+    "prerequisite": "backend dev server running (schema is introspected live)"
+  },
+  "visualQA": {
+    "tool": "playwright",
+    "target": "storybook",
+    "startCommand": "pnpm run storybook"
+  },
+  "designSource": "figma",
+  "conventions": {
+    "notes": "Use the `cn` helper for classnames. Named breakpoints only. Design tokens are source-of-truth; never hand-edit generated CSS. Keep comments minimal.",
+    "docRef": "AGENTS.md"
+  },
+  "models": {
+    "scout": "inherit",
+    "builder": "inherit",
+    "reviewer": "sonnet"
+  },
+  "personas": {
+    "conductor": "Conductor",
+    "scout": "Scout",
+    "builder": "Builder",
+    "reviewer": "Reviewer"
+  },
+  "architectureMap": {
+    "path": ".conductor/architecture.md",
+    "generatedAtSha": "0000000000000000000000000000000000000000"
+  }
+}

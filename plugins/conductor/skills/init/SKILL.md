@@ -1,0 +1,83 @@
+---
+name: init
+description: "Set up conductor for a project: detect the toolchain, confirm it with you, and persist a .conductor/ profile + architecture map so /conductor:assemble can run here. Use for 'set up conductor', 'conductor init', 'profile this project', or the first time conductor runs in a repo."
+---
+
+# conductor:init
+
+Run once per project. Produces a committed `.conductor/profile.json` (+ `architecture.md`) that teaches the flow how *this* repo works. Re-run whenever the toolchain changes.
+
+## 1 · Detect (mechanical, read-only)
+
+Run the bundled detector and read its JSON:
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/bin/detect.mjs"
+```
+
+It reports package manager, task runner, trunk, candidate gate commands, protected globs, codegen signals, visual-QA target, and stack — each with a confidence level plus a `needsConfirm` list and `warnings`. Never accept low/medium-confidence guesses silently.
+
+## 2 · Confirm + fill gaps (interview)
+
+Batch-confirm the high-confidence values; interrogate everything in `needsConfirm` and anything blank:
+
+- **Gates** — exact lint / format / format-write / typecheck / build / test commands. Blank = not available; note it and move on.
+- **Conventions** — house rules the agents must follow (classname helper, comment style, breakpoints, design-token rules…). Offer to read an in-repo doc (`AGENTS.md` / `CLAUDE.md`) and record it as `conventions.docRef` + a short `notes` summary.
+- **Visual QA** — is there a Storybook/dev server to check against, how is it started, is Playwright available? (`tool: none` if not.)
+- **Design source** — `figma` / `tickets` / `none`.
+- **Codegen** — does changing the API need a regen step? the command + any prerequisite (e.g. a backend must be running first).
+- **Models** — per-role override (default `inherit`; a cheaper reviewer is a common, sound choice).
+- **Plan dir** — default `.conductor/plans`; if the repo already uses one (e.g. `.agents/plans`), offer to reuse it.
+
+## 3 · Persona skin
+
+Offer the shipped presets, or let the user enter their own names, or keep defaults:
+
+```bash
+cat "${CLAUDE_PLUGIN_ROOT}/reference/presets.json"
+```
+
+Shipped presets are trademark-safe. The user can name the crew anything they like — custom names live only in their `profile.json`, never in the plugin. Record the four names under `personas`.
+
+## 4 · Architecture map
+
+Dispatch the **scout** agent in map mode to build a project-understanding map (package/module map, data-flow, key entry points) and write it to `.conductor/architecture.md`. Stamp it with the current commit:
+
+```bash
+git rev-parse HEAD
+```
+
+Record that SHA as `architectureMap.generatedAtSha`. (Scout refreshes stale slices per effort; `/conductor:resync` regenerates the whole map.)
+
+## 5 · Persist
+
+Write `.conductor/profile.json` (validate against `${CLAUDE_PLUGIN_ROOT}/reference/profile.schema.json`) and `.conductor/architecture.md`. Show the user the final profile and offer to commit both.
+
+## 6 · Permissions
+
+A plugin can't ship permission grants, so the flow will otherwise prompt on Playwright and a couple of git reads. Print the entries to add to the repo's `.claude/settings.json`, and offer to append them yourself with the user's ok:
+
+```json
+{
+  "permissions": {
+    "allow": [
+      "Bash(git diff:*)",
+      "Bash(git branch:*)",
+      "mcp__plugin_playwright_playwright__browser_navigate",
+      "mcp__plugin_playwright_playwright__browser_snapshot",
+      "mcp__plugin_playwright_playwright__browser_take_screenshot",
+      "mcp__plugin_playwright_playwright__browser_resize",
+      "mcp__plugin_playwright_playwright__browser_click",
+      "mcp__plugin_playwright_playwright__browser_console_messages",
+      "mcp__plugin_playwright_playwright__browser_network_requests",
+      "mcp__plugin_playwright_playwright__browser_wait_for"
+    ]
+  }
+}
+```
+
+Skip the Playwright entries if `visualQA.tool` is `none`. The Playwright tool names assume a Playwright MCP is installed in the host; adjust to match the host's server if it differs.
+
+## 7 · Done
+
+Tell the user they can now run `/conductor:assemble` with a design/ticket link.

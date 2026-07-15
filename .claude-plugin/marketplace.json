@@ -1,0 +1,14 @@
+{
+  "name": "jpgrusling",
+  "owner": {
+    "name": "JP Grusling"
+  },
+  "description": "JP Grusling's Claude Code plugins.",
+  "plugins": [
+    {
+      "name": "conductor",
+      "source": "./plugins/conductor",
+      "description": "Orchestrate a design→delivery effort with a team of subagents, driven by a per-project profile you set up once."
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/jpgrusling/claude-plugins/plugins/conductor/reference/profile.schema.json",
+  "title": "Conductor project profile",
+  "description": "Per-project context for the conductor plugin. Written once by `/conductor:init`, committed at .conductor/profile.json, and read by the conductor skill and its agents so the same flow runs in any repo.",
+  "type": "object",
+  "required": ["version", "trunk", "gates"],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "type": "integer",
+      "description": "Profile schema version.",
+      "const": 1
+    },
+    "trunk": {
+      "type": "string",
+      "description": "The integration branch efforts merge into (e.g. main, dev)."
+    },
+    "packageManager": {
+      "type": "string",
+      "description": "Detected package manager.",
+      "examples": ["pnpm", "npm", "yarn", "bun"]
+    },
+    "taskRunner": {
+      "type": "string",
+      "description": "Monorepo task runner, if any.",
+      "examples": ["turbo", "nx", "make", "none"]
+    },
+    "gates": {
+      "type": "object",
+      "description": "Commands the builder/reviewer run to verify work. Empty string = not available in this repo.",
+      "additionalProperties": false,
+      "properties": {
+        "lint": { "type": "string" },
+        "format": { "type": "string", "description": "Check-only format command." },
+        "formatWrite": { "type": "string", "description": "Format-and-write command." },
+        "typecheck": { "type": "string" },
+        "build": { "type": "string" },
+        "test": { "type": "string" }
+      }
+    },
+    "protected": {
+      "type": "array",
+      "description": "Glob patterns the builder must never stage/commit (secrets, generated, machine-local).",
+      "items": { "type": "string" }
+    },
+    "planDir": {
+      "type": "string",
+      "description": "Where effort plans are written.",
+      "default": ".conductor/plans"
+    },
+    "codegen": {
+      "type": "object",
+      "description": "Whether and how the repo regenerates code from a schema (e.g. GraphQL).",
+      "additionalProperties": false,
+      "properties": {
+        "needed": { "type": "boolean" },
+        "command": { "type": "string" },
+        "prerequisite": {
+          "type": "string",
+          "description": "Anything that must be true first (e.g. 'backend running')."
+        }
+      }
+    },
+    "visualQA": {
+      "type": "object",
+      "description": "How the reviewer visually checks UI work.",
+      "additionalProperties": false,
+      "properties": {
+        "tool": { "type": "string", "enum": ["playwright", "none"] },
+        "target": { "type": "string", "enum": ["storybook", "devserver", "url", "none"] },
+        "startCommand": { "type": "string" }
+      }
+    },
+    "designSource": {
+      "type": "string",
+      "description": "Where design input comes from.",
+      "enum": ["figma", "tickets", "none"]
+    },
+    "conventions": {
+      "type": "object",
+      "description": "House rules the agents must follow, and/or a pointer to the repo doc that states them.",
+      "additionalProperties": false,
+      "properties": {
+        "notes": { "type": "string" },
+        "docRef": {
+          "type": "string",
+          "description": "Path to an in-repo conventions doc the agents should read (e.g. AGENTS.md, CLAUDE.md)."
+        }
+      }
+    },
+    "models": {
+      "type": "object",
+      "description": "Per-role model override applied at dispatch. 'inherit' uses the session model.",
+      "additionalProperties": false,
+      "properties": {
+        "scout": { "type": "string", "default": "inherit" },
+        "builder": { "type": "string", "default": "inherit" },
+        "reviewer": { "type": "string", "default": "inherit" }
+      }
+    },
+    "personas": {
+      "type": "object",
+      "description": "Display names for each role, used in narration only (invocation handles stay functional). Set by a preset skin or free-text during init.",
+      "additionalProperties": false,
+      "properties": {
+        "conductor": { "type": "string", "default": "Conductor" },
+        "scout": { "type": "string", "default": "Scout" },
+        "builder": { "type": "string", "default": "Builder" },
+        "reviewer": { "type": "string", "default": "Reviewer" }
+      }
+    },
+    "architectureMap": {
+      "type": "object",
+      "description": "The persisted project-understanding map and the commit it was generated at (for staleness checks).",
+      "additionalProperties": false,
+      "properties": {
+        "path": { "type": "string", "default": ".conductor/architecture.md" },
+        "generatedAtSha": { "type": "string" }
+      }
+    }
+  }
+}
