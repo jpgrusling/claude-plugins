@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/jpgrusling/claude-plugins/plugins/conductor/reference/profile.schema.json",
-  "title": "Conductor project profile",
-  "description": "Per-project context for the conductor plugin. Written once by `/conductor:init`, committed at .conductor/profile.json, and read by the conductor skill and its agents so the same flow runs in any repo.",
+  "$id": "https://github.com/jpgrusling/claude-plugins/plugins/crew/reference/profile.schema.json",
+  "title": "Crew project profile",
+  "description": "Per-project context for the crew plugin. Written once by `/crew:init`, committed at .crew/profile.json, and read by the assemble skill and its agents so the same flow runs in any repo.",
   "type": "object",
   "required": ["version", "trunk", "gates"],
   "additionalProperties": false,
@@ -28,7 +28,7 @@
     },
     "gates": {
       "type": "object",
-      "description": "Commands the builder/reviewer run to verify work. Empty string = not available in this repo.",
+      "description": "Commands the builder/inspector run to verify work. Empty string = not available in this repo.",
       "additionalProperties": false,
       "properties": {
         "lint": { "type": "string" },
@@ -47,7 +47,7 @@
     "planDir": {
       "type": "string",
       "description": "Where effort plans are written.",
-      "default": ".conductor/plans"
+      "default": ".crew/plans"
     },
     "codegen": {
       "type": "object",
@@ -64,7 +64,7 @@
     },
     "visualQA": {
       "type": "object",
-      "description": "How the reviewer visually checks UI work.",
+      "description": "How the inspector visually checks UI work.",
       "additionalProperties": false,
       "properties": {
         "tool": { "type": "string", "enum": ["playwright", "none"] },
@@ -79,7 +79,7 @@
     },
     "conventions": {
       "type": "object",
-      "description": "House rules the agents must follow, and/or a pointer to the repo doc that states them.",
+      "description": "House rules the crew must follow, and/or a pointer to the repo doc that states them.",
       "additionalProperties": false,
       "properties": {
         "notes": { "type": "string" },
@@ -94,9 +94,9 @@
       "description": "Per-role model override applied at dispatch. 'inherit' uses the session model.",
       "additionalProperties": false,
       "properties": {
-        "scout": { "type": "string", "default": "inherit" },
+        "surveyor": { "type": "string", "default": "inherit" },
         "builder": { "type": "string", "default": "inherit" },
-        "reviewer": { "type": "string", "default": "inherit" }
+        "inspector": { "type": "string", "default": "inherit" }
       }
     },
     "personas": {
@@ -104,10 +104,10 @@
       "description": "Display names for each role, used in narration only (invocation handles stay functional). Set by a preset skin or free-text during init.",
       "additionalProperties": false,
       "properties": {
-        "conductor": { "type": "string", "default": "Conductor" },
-        "scout": { "type": "string", "default": "Scout" },
+        "foreman": { "type": "string", "default": "Foreman" },
+        "surveyor": { "type": "string", "default": "Surveyor" },
         "builder": { "type": "string", "default": "Builder" },
-        "reviewer": { "type": "string", "default": "Reviewer" }
+        "inspector": { "type": "string", "default": "Inspector" }
       }
     },
     "architectureMap": {
@@ -115,7 +115,7 @@
       "description": "The persisted project-understanding map and the commit it was generated at (for staleness checks).",
       "additionalProperties": false,
       "properties": {
-        "path": { "type": "string", "default": ".conductor/architecture.md" },
+        "path": { "type": "string", "default": ".crew/architecture.md" },
         "generatedAtSha": { "type": "string" }
       }
     }

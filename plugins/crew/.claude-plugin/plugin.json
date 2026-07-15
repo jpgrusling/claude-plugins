@@ -1,0 +1,22 @@
+{
+  "name": "crew",
+  "displayName": "Crew",
+  "description": "Assemble a crew of subagents to run a single design→delivery effort — survey → align → build in an isolated worktree → inspect (autonomous QA loop) → integrate. Project-specific knowledge (gates, conventions, codegen, visual QA) is discovered once by `init` and persisted to a committed .crew/ profile, so the same flow runs in any repo.",
+  "version": "0.1.0",
+  "author": {
+    "name": "JP Grusling",
+    "url": "https://github.com/jpgrusling"
+  },
+  "homepage": "https://github.com/jpgrusling/claude-plugins/tree/main/plugins/crew",
+  "repository": "https://github.com/jpgrusling/claude-plugins",
+  "license": "MIT",
+  "keywords": [
+    "workflow",
+    "orchestration",
+    "subagents",
+    "delivery",
+    "code-review",
+    "worktree",
+    "figma"
+  ]
+}

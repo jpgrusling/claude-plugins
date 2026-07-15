@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// conductor: read-only project detection. Emits a facts JSON to stdout that the
+// crew: read-only project detection. Emits a facts JSON to stdout that the
 // `init` skill presents and confirms. Never writes anything. JS/TS-first; records
 // non-JS stacks as a warning rather than pretending to understand them.
 

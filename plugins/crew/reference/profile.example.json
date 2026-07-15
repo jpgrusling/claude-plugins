@@ -12,7 +12,7 @@
     "test": "pnpm run test"
   },
   "protected": ["**/.env*", "**/*.gen.ts"],
-  "planDir": ".conductor/plans",
+  "planDir": ".crew/plans",
   "codegen": {
     "needed": true,
     "command": "pnpm run generate:schema && pnpm run generate:types",
@@ -29,18 +29,18 @@
     "docRef": "AGENTS.md"
   },
   "models": {
-    "scout": "inherit",
+    "surveyor": "inherit",
     "builder": "inherit",
-    "reviewer": "sonnet"
+    "inspector": "sonnet"
   },
   "personas": {
-    "conductor": "Conductor",
-    "scout": "Scout",
+    "foreman": "Foreman",
+    "surveyor": "Surveyor",
     "builder": "Builder",
-    "reviewer": "Reviewer"
+    "inspector": "Inspector"
   },
   "architectureMap": {
-    "path": ".conductor/architecture.md",
+    "path": ".crew/architecture.md",
     "generatedAtSha": "0000000000000000000000000000000000000000"
   }
 }

@@ -1,11 +1,11 @@
 ---
 name: init
-description: "Set up conductor for a project: detect the toolchain, confirm it with you, and persist a .conductor/ profile + architecture map so /conductor:assemble can run here. Use for 'set up conductor', 'conductor init', 'profile this project', or the first time conductor runs in a repo."
+description: "Set up crew for a project: detect the toolchain, confirm it with you, and persist a .crew/ profile + architecture map so /crew:assemble can run here. Use for 'set up crew', 'crew init', 'profile this project', or the first time crew runs in a repo."
 ---
 
-# conductor:init
+# crew:init
 
-Run once per project. Produces a committed `.conductor/profile.json` (+ `architecture.md`) that teaches the flow how *this* repo works. Re-run whenever the toolchain changes.
+Run once per project. Produces a committed `.crew/profile.json` (+ `architecture.md`) that teaches the flow how *this* repo works. Re-run whenever the toolchain changes.
 
 ## 1 · Detect (mechanical, read-only)
 
@@ -22,12 +22,12 @@ It reports package manager, task runner, trunk, candidate gate commands, protect
 Batch-confirm the high-confidence values; interrogate everything in `needsConfirm` and anything blank:
 
 - **Gates** — exact lint / format / format-write / typecheck / build / test commands. Blank = not available; note it and move on.
-- **Conventions** — house rules the agents must follow (classname helper, comment style, breakpoints, design-token rules…). Offer to read an in-repo doc (`AGENTS.md` / `CLAUDE.md`) and record it as `conventions.docRef` + a short `notes` summary.
+- **Conventions** — house rules the crew must follow (classname helper, comment style, breakpoints, design-token rules…). Offer to read an in-repo doc (`AGENTS.md` / `CLAUDE.md`) and record it as `conventions.docRef` + a short `notes` summary.
 - **Visual QA** — is there a Storybook/dev server to check against, how is it started, is Playwright available? (`tool: none` if not.)
 - **Design source** — `figma` / `tickets` / `none`.
 - **Codegen** — does changing the API need a regen step? the command + any prerequisite (e.g. a backend must be running first).
-- **Models** — per-role override (default `inherit`; a cheaper reviewer is a common, sound choice).
-- **Plan dir** — default `.conductor/plans`; if the repo already uses one (e.g. `.agents/plans`), offer to reuse it.
+- **Models** — per-role override (default `inherit`; a cheaper inspector is a common, sound choice).
+- **Plan dir** — default `.crew/plans`; if the repo already uses one (e.g. `.agents/plans`), offer to reuse it.
 
 ## 3 · Persona skin
 
@@ -41,17 +41,17 @@ Shipped presets are trademark-safe. The user can name the crew anything they lik
 
 ## 4 · Architecture map
 
-Dispatch the **scout** agent in map mode to build a project-understanding map (package/module map, data-flow, key entry points) and write it to `.conductor/architecture.md`. Stamp it with the current commit:
+Dispatch the **surveyor** agent in map mode to build a project-understanding map (package/module map, data-flow, key entry points) and write it to `.crew/architecture.md`. Stamp it with the current commit:
 
 ```bash
 git rev-parse HEAD
 ```
 
-Record that SHA as `architectureMap.generatedAtSha`. (Scout refreshes stale slices per effort; `/conductor:resync` regenerates the whole map.)
+Record that SHA as `architectureMap.generatedAtSha`. (The surveyor refreshes stale slices per effort; `/crew:resync` regenerates the whole map.)
 
 ## 5 · Persist
 
-Write `.conductor/profile.json` (validate against `${CLAUDE_PLUGIN_ROOT}/reference/profile.schema.json`) and `.conductor/architecture.md`. Show the user the final profile and offer to commit both.
+Write `.crew/profile.json` (validate against `${CLAUDE_PLUGIN_ROOT}/reference/profile.schema.json`) and `.crew/architecture.md`. Show the user the final profile and offer to commit both.
 
 ## 6 · Permissions
 
@@ -80,4 +80,4 @@ Skip the Playwright entries if `visualQA.tool` is `none`. The Playwright tool na
 
 ## 7 · Done
 
-Tell the user they can now run `/conductor:assemble` with a design/ticket link.
+Tell the user they can now run `/crew:assemble` with a design/ticket link.

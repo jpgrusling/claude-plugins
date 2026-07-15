@@ -12,12 +12,12 @@ claude plugin marketplace add jpgrusling/claude-plugins
 
 | Plugin | What it does |
 | --- | --- |
-| [**conductor**](./plugins/conductor) | Orchestrate a design→delivery effort with a team of subagents (investigate → align → implement in a worktree → QA loop → integrate), driven by a per-project profile you set up once with `init`. Works in any repo. |
+| [**crew**](./plugins/crew) | Assemble a crew of subagents to run a design→delivery effort (survey → align → build in a worktree → inspect → integrate), driven by a per-project profile you set up once with `init`. Works in any repo. |
 
 ## Install a plugin
 
 ```bash
-claude plugin install conductor@jpgrusling
+claude plugin install crew@jpgrusling
 ```
 
 ## License

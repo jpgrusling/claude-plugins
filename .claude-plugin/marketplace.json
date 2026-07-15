@@ -6,9 +6,9 @@
   "description": "JP Grusling's Claude Code plugins.",
   "plugins": [
     {
-      "name": "conductor",
-      "source": "./plugins/conductor",
-      "description": "Orchestrate a design→delivery effort with a team of subagents, driven by a per-project profile you set up once."
+      "name": "crew",
+      "source": "./plugins/crew",
+      "description": "Assemble a crew of subagents to run a design→delivery effort — survey → align → build in a worktree → inspect → integrate — driven by a per-project profile you set up once."
     }
   ]
 }

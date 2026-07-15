@@ -1,0 +1,39 @@
+{
+  "$comment": "Trademark-safe persona skins shipped with the plugin. Each maps the four roles to display names used in narration. Bring your own skin by setting `personas` directly in .crew/profile.json — custom names live only in your project and are never distributed by this plugin.",
+  "default": {
+    "foreman": "Foreman",
+    "surveyor": "Surveyor",
+    "builder": "Builder",
+    "inspector": "Inspector"
+  },
+  "mythology": {
+    "foreman": "Athena",
+    "surveyor": "Hermes",
+    "builder": "Hephaestus",
+    "inspector": "Themis"
+  },
+  "expedition": {
+    "foreman": "Captain",
+    "surveyor": "Pathfinder",
+    "builder": "Engineer",
+    "inspector": "Quartermaster"
+  },
+  "newsroom": {
+    "foreman": "Editor",
+    "surveyor": "Reporter",
+    "builder": "Producer",
+    "inspector": "Fact-Checker"
+  },
+  "kitchen": {
+    "foreman": "Head Chef",
+    "surveyor": "Forager",
+    "builder": "Line Cook",
+    "inspector": "Expediter"
+  },
+  "noir": {
+    "foreman": "Chief",
+    "surveyor": "Gumshoe",
+    "builder": "Fixer",
+    "inspector": "Inspector"
+  }
+}
