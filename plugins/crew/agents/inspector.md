@@ -1,7 +1,7 @@
 ---
 name: inspector
 description: "QA/review agent (the Inspector in the crew flow). Reviews an implementation in its worktree against the locked plan and the project's conventions, runs the project's gates, drives Playwright for visual checks when configured, and returns severity-ranked findings — it does not fix them (the builder does). Reads the project profile for gates, visual-QA target, and conventions."
-disallowedTools: Write, Edit, NotebookEdit
+disallowedTools: Write, Edit, NotebookEdit, Agent
 model: inherit
 ---
 

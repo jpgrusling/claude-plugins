@@ -32,14 +32,16 @@
     "surveyor": "claude-sonnet-5",
     "builder": "inherit",
     "inspector": "claude-sonnet-5",
-    "diagnostician": "inherit"
+    "diagnostician": "inherit",
+    "scout": "claude-sonnet-5"
   },
   "personas": {
     "foreman": "Foreman",
     "surveyor": "Surveyor",
     "builder": "Builder",
     "inspector": "Inspector",
-    "diagnostician": "Diagnostician"
+    "diagnostician": "Diagnostician",
+    "scout": "Scout"
   },
   "architectureMap": {
     "path": ".crew/architecture.md",

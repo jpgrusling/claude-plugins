@@ -4,14 +4,16 @@
     "surveyor": "claude-sonnet-5",
     "builder": "inherit",
     "inspector": "claude-sonnet-5",
-    "diagnostician": "inherit"
+    "diagnostician": "inherit",
+    "scout": "claude-sonnet-5"
   },
   "personas": {
     "foreman": "Captain",
     "surveyor": "Pathfinder",
     "builder": "Engineer",
     "inspector": "Quartermaster",
-    "diagnostician": "Medic"
+    "diagnostician": "Medic",
+    "scout": "Envoy"
   },
   "visualQA": { "tool": "playwright" },
   "conventions": { "docRef": "AGENTS.md" }

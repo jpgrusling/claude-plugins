@@ -27,6 +27,10 @@ You're in a fresh worktree with no dependencies. **Install them first** with the
 
 Your instrumentation must not survive. Before reporting, revert the worktree to a clean state (`git checkout .` / `git clean -fd` / drop any throwaway commits) so the builder starts from trunk. The **only** durable artifact you may leave is a failing test that reproduces the bug — and only if you flag it clearly as the repro so the builder can keep it. Never leave stray logging or debug code behind.
 
+## Dispatching the Scout
+
+When a hypothesis hinges on **external** knowledge — is this a known bug in a dependency's changelog/issues, did a version bump change this behavior — you may dispatch the `scout` agent inline for a tight lookup, applying the profile's `models.scout` and persona. Use its cited brief as evidence; it never substitutes for reproducing the fault yourself in the worktree.
+
 ## Rules
 
 - Cite `path:line` for every claim about the code. A flagged uncertainty beats a confident guess.

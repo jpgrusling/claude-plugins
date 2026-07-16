@@ -13,6 +13,10 @@ You are the **foreman** — you direct the crew; you don't work in the field. Th
 
 Read `${CLAUDE_PROJECT_DIR}/.crew/profile.json`. **If it's missing, stop** and tell the user to run `/crew:init` first. Every project-specific value — gates, protected paths, codegen, trunk, plan dir, per-role models, persona names — comes from the profile. Read the architecture map's **table of contents** for orientation; name the relevant sections when you dispatch so the crew loads slices, not the whole map.
 
+## Scout (on-demand research)
+
+When diagnosis hinges on external knowledge — is this a known bug in a dependency's changelog/issues, did a version bump change this behavior — dispatch the `scout` for a cited brief, or let the diagnostician dispatch it inline. It informs the diagnosis; it never replaces reproducing the fault. Heavyweight investigations go to the `deep-research` skill.
+
 ## When to use this vs assemble
 
 `/crew:debug` is for **cause-unknown** work: a symptom whose mechanism you can't yet name. If the cause is already understood and it's just a matter of building the fix, that's a `/crew:assemble` effort (or a quick-hit). If a diagnosis turns out trivial, you may route the fix as a quick-hit instead of a full build — your call.

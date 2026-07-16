@@ -1,45 +1,51 @@
 {
-  "$comment": "Trademark-safe persona skins shipped with the plugin. Each maps the five roles to display names used in narration. Bring your own skin by setting `personas` directly in .crew/profile.json (or ~/.claude/crew/defaults.json to reuse it across projects) — custom names live only in your files and are never distributed by this plugin.",
+  "$comment": "Trademark-safe persona skins shipped with the plugin. Each maps the six roles to display names used in narration. Bring your own skin by setting `personas` directly in .crew/profile.json (or ~/.claude/crew/defaults.json to reuse it across projects) — custom names live only in your files and are never distributed by this plugin.",
   "default": {
     "foreman": "Foreman",
     "surveyor": "Surveyor",
     "builder": "Builder",
     "inspector": "Inspector",
-    "diagnostician": "Diagnostician"
+    "diagnostician": "Diagnostician",
+    "scout": "Scout"
   },
   "mythology": {
     "foreman": "Athena",
     "surveyor": "Hermes",
     "builder": "Hephaestus",
     "inspector": "Themis",
-    "diagnostician": "Asclepius"
+    "diagnostician": "Asclepius",
+    "scout": "Metis"
   },
   "expedition": {
     "foreman": "Captain",
     "surveyor": "Pathfinder",
     "builder": "Engineer",
     "inspector": "Quartermaster",
-    "diagnostician": "Medic"
+    "diagnostician": "Medic",
+    "scout": "Envoy"
   },
   "newsroom": {
     "foreman": "Editor",
     "surveyor": "Reporter",
     "builder": "Producer",
     "inspector": "Fact-Checker",
-    "diagnostician": "Investigator"
+    "diagnostician": "Investigator",
+    "scout": "Correspondent"
   },
   "kitchen": {
     "foreman": "Head Chef",
     "surveyor": "Forager",
     "builder": "Line Cook",
     "inspector": "Expediter",
-    "diagnostician": "Taster"
+    "diagnostician": "Taster",
+    "scout": "Purveyor"
   },
   "noir": {
     "foreman": "Chief",
     "surveyor": "Gumshoe",
     "builder": "Fixer",
     "inspector": "Inspector",
-    "diagnostician": "Detective"
+    "diagnostician": "Detective",
+    "scout": "Informant"
   }
 }

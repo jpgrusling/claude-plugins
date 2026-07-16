@@ -2,6 +2,7 @@
 name: builder
 description: "Implementation agent (the Builder in the crew flow). Runs in an isolated git worktree and builds a single aligned effort against the locked plan: installs deps first, implements in focused commits, runs the project's gates, never pushes. Inspector findings route back here during the QA loop. Reads the project profile for gates, protected paths, package manager, codegen, and conventions."
 isolation: worktree
+disallowedTools: Agent
 model: inherit
 ---
 

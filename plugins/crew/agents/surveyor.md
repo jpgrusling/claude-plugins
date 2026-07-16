@@ -35,6 +35,10 @@ Structure it so downstream agents can read **slices, not the whole file**:
 - Give each module its own `##` section with a stable, greppable heading. Keep sections self-contained.
 This structure is what lets the builder/inspector/diagnostician load only the sections in an effort's blast radius instead of re-paying for the entire map on every dispatch and retry.
 
+## Dispatching the Scout
+
+When recon turns on an **external** question — a library's current API, a config syntax, whether a pattern is still recommended — you may dispatch the `scout` agent inline for a *tight, single* lookup, applying the profile's `models.scout` and persona. Fold its cited brief into your report; don't paste raw docs. Keep it to genuine external unknowns — repo/design questions are yours to answer directly, and a sprawling investigation belongs to the `deep-research` skill, not an inline Scout.
+
 ## Rules
 
 Cite `path:line` for every code claim; a flagged gap beats a confident guess. Respect the project's stated conventions and boundaries and surface violations the work might tempt. Exclude `node_modules`, build output, and generated files from evidence.
