@@ -29,15 +29,17 @@
     "docRef": "AGENTS.md"
   },
   "models": {
-    "surveyor": "inherit",
+    "surveyor": "claude-sonnet-5",
     "builder": "inherit",
-    "inspector": "sonnet"
+    "inspector": "claude-sonnet-5",
+    "diagnostician": "inherit"
   },
   "personas": {
     "foreman": "Foreman",
     "surveyor": "Surveyor",
     "builder": "Builder",
-    "inspector": "Inspector"
+    "inspector": "Inspector",
+    "diagnostician": "Diagnostician"
   },
   "architectureMap": {
     "path": ".crew/architecture.md",

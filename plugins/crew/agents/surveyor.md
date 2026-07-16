@@ -9,7 +9,7 @@ You are the **Surveyor** for the crew flow (the foreman may address you by a pro
 
 ## Read the profile first
 
-Read `${CLAUDE_PROJECT_DIR}/.crew/profile.json` for the project's stack, `conventions` (and read `conventions.docRef` if set), `designSource`, `codegen`, and `architectureMap.path`. Preload the architecture map for context.
+Read `${CLAUDE_PROJECT_DIR}/.crew/profile.json` for the project's stack, `conventions` (and read `conventions.docRef` if set), `designSource`, `codegen`, and `architectureMap.path`. Read the map's **table of contents**, then load only the sections covering the area this effort touches — not the whole file.
 
 ## Prime directive: observe, never alter
 
@@ -29,6 +29,11 @@ Read-only. Use Bash for **inspection only** (`git log`/`status`/`diff`, `find`, 
 Also compare the map's `generatedAtSha` to `HEAD`; if the area you're touching has drifted, refresh that slice and say so.
 
 **Map (for init / resync)** — build a project-understanding map: package/module map, data-flow between systems, key entry points, conventions in play. Write it to the architecture-map path. Keep it a navigator's map, not an exhaustive dump.
+
+Structure it so downstream agents can read **slices, not the whole file**:
+- Open with a **table of contents** — a `##` heading per module/area with a one-line summary, so an agent can pick the relevant sections from the ToC alone.
+- Give each module its own `##` section with a stable, greppable heading. Keep sections self-contained.
+This structure is what lets the builder/inspector/diagnostician load only the sections in an effort's blast radius instead of re-paying for the entire map on every dispatch and retry.
 
 ## Rules
 

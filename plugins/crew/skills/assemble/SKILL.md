@@ -11,7 +11,7 @@ You are the **foreman** — you assemble and direct the crew; you don't work in 
 
 ## 0 · Load the profile
 
-Read `${CLAUDE_PROJECT_DIR}/.crew/profile.json`. **If it's missing, stop** and tell the user to run `/crew:init` first (or offer to run it). Every project-specific value below — gate commands, protected paths, codegen, visual-QA target, conventions, trunk, plan dir, per-role models, persona names — comes from the profile, never hardcoded. Preload `.crew/architecture.md` for context.
+Read `${CLAUDE_PROJECT_DIR}/.crew/profile.json`. **If it's missing, stop** and tell the user to run `/crew:init` first (or offer to run it). Every project-specific value below — gate commands, protected paths, codegen, visual-QA target, conventions, trunk, plan dir, per-role models, persona names — comes from the profile, never hardcoded. Read the architecture map's **table of contents** for orientation; load full sections only as an effort's blast radius makes them relevant, and name the relevant sections when you dispatch a crew member so they load slices, not the whole map.
 
 ## The crew
 

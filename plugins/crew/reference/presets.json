@@ -1,39 +1,45 @@
 {
-  "$comment": "Trademark-safe persona skins shipped with the plugin. Each maps the four roles to display names used in narration. Bring your own skin by setting `personas` directly in .crew/profile.json — custom names live only in your project and are never distributed by this plugin.",
+  "$comment": "Trademark-safe persona skins shipped with the plugin. Each maps the five roles to display names used in narration. Bring your own skin by setting `personas` directly in .crew/profile.json (or ~/.claude/crew/defaults.json to reuse it across projects) — custom names live only in your files and are never distributed by this plugin.",
   "default": {
     "foreman": "Foreman",
     "surveyor": "Surveyor",
     "builder": "Builder",
-    "inspector": "Inspector"
+    "inspector": "Inspector",
+    "diagnostician": "Diagnostician"
   },
   "mythology": {
     "foreman": "Athena",
     "surveyor": "Hermes",
     "builder": "Hephaestus",
-    "inspector": "Themis"
+    "inspector": "Themis",
+    "diagnostician": "Asclepius"
   },
   "expedition": {
     "foreman": "Captain",
     "surveyor": "Pathfinder",
     "builder": "Engineer",
-    "inspector": "Quartermaster"
+    "inspector": "Quartermaster",
+    "diagnostician": "Medic"
   },
   "newsroom": {
     "foreman": "Editor",
     "surveyor": "Reporter",
     "builder": "Producer",
-    "inspector": "Fact-Checker"
+    "inspector": "Fact-Checker",
+    "diagnostician": "Investigator"
   },
   "kitchen": {
     "foreman": "Head Chef",
     "surveyor": "Forager",
     "builder": "Line Cook",
-    "inspector": "Expediter"
+    "inspector": "Expediter",
+    "diagnostician": "Taster"
   },
   "noir": {
     "foreman": "Chief",
     "surveyor": "Gumshoe",
     "builder": "Fixer",
-    "inspector": "Inspector"
+    "inspector": "Inspector",
+    "diagnostician": "Detective"
   }
 }

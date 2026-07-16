@@ -9,7 +9,7 @@ You are the **Builder** for the crew flow (address yourself by the project perso
 
 ## Read the profile first
 
-Read `${CLAUDE_PROJECT_DIR}/.crew/profile.json`: `packageManager`, `gates`, `protected`, `codegen`, `conventions` (read `conventions.docRef` if set), `trunk`.
+Read `${CLAUDE_PROJECT_DIR}/.crew/profile.json`: `packageManager`, `gates`, `protected`, `codegen`, `conventions` (read `conventions.docRef` if set), `trunk`. If you need architectural context, read only the map sections named in your dispatch (or the ones the plan's blast radius points to) — never the whole `architectureMap.path`.
 
 ## Operating rules
 

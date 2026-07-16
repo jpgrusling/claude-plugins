@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "models": {
+    "surveyor": "claude-sonnet-5",
+    "builder": "inherit",
+    "inspector": "claude-sonnet-5",
+    "diagnostician": "inherit"
+  },
+  "personas": {
+    "foreman": "Captain",
+    "surveyor": "Pathfinder",
+    "builder": "Engineer",
+    "inspector": "Quartermaster",
+    "diagnostician": "Medic"
+  },
+  "visualQA": { "tool": "playwright" },
+  "conventions": { "docRef": "AGENTS.md" }
+}

@@ -7,6 +7,12 @@ description: "Set up crew for a project: detect the toolchain, confirm it with y
 
 Run once per project. Produces a committed `.crew/profile.json` (+ `architecture.md`) that teaches the flow how *this* repo works. Re-run whenever the toolchain changes.
 
+## 0 · Load user defaults (if any)
+
+Read `~/.claude/crew/defaults.json` if it exists (validate against `${CLAUDE_PLUGIN_ROOT}/reference/defaults.schema.json`). It holds the user's standing preferences — `models`, `personas`, `visualQA.tool`, `planDir`, `conventions.docRef`, extra `permissions.allow`. Use it to **pre-fill** the interview so you only ask about what it doesn't cover.
+
+**Precedence, highest first:** an existing project `.crew/profile.json` > detected values (step 1) > these user defaults > plugin defaults (the schema). Never let a user default silently override something the detector found with high confidence — reconcile and confirm if they disagree. If no defaults file exists, mention once that the user can set these up with `/crew:defaults` (or hand-write from `${CLAUDE_PLUGIN_ROOT}/reference/defaults.example.json`) to carry choices across projects, then continue.
+
 ## 1 · Detect (mechanical, read-only)
 
 Run the bundled detector and read its JSON:
@@ -26,7 +32,7 @@ Batch-confirm the high-confidence values; interrogate everything in `needsConfir
 - **Visual QA** — is there a Storybook/dev server to check against, how is it started, is Playwright available? (`tool: none` if not.)
 - **Design source** — `figma` / `tickets` / `none`.
 - **Codegen** — does changing the API need a regen step? the command + any prerequisite (e.g. a backend must be running first).
-- **Models** — per-role override (default `inherit`; a cheaper inspector is a common, sound choice).
+- **Models** — per-role tier. Propose the default tiering (strong `builder`/`diagnostician` for code and judgment; `claude-sonnet-5` for `surveyor`/`inspector` to cut cost) unless the user's defaults already set it. Confirm rather than assume.
 - **Plan dir** — default `.crew/plans`; if the repo already uses one (e.g. `.agents/plans`), offer to reuse it.
 
 ## 3 · Persona skin
@@ -37,7 +43,7 @@ Offer the shipped presets, or let the user enter their own names, or keep defaul
 cat "${CLAUDE_PLUGIN_ROOT}/reference/presets.json"
 ```
 
-Shipped presets are trademark-safe. The user can name the crew anything they like — custom names live only in their `profile.json`, never in the plugin. Record the four names under `personas`.
+Shipped presets are trademark-safe. The user can name the crew anything they like — custom names live only in their `profile.json`, never in the plugin. If the user's defaults set a skin, use it unless they want to change it here. Record all five names (foreman, surveyor, builder, inspector, diagnostician) under `personas`.
 
 ## 4 · Architecture map
 
@@ -76,7 +82,7 @@ A plugin can't ship permission grants, so the flow will otherwise prompt on Play
 }
 ```
 
-Skip the Playwright entries if `visualQA.tool` is `none`. The Playwright tool names assume a Playwright MCP is installed in the host; adjust to match the host's server if it differs.
+Skip the Playwright entries if `visualQA.tool` is `none`. The Playwright tool names assume a Playwright MCP is installed in the host; adjust to match the host's server if it differs. Append any entries from the user defaults' `permissions.allow` on top of this baseline.
 
 ## 7 · Done
 

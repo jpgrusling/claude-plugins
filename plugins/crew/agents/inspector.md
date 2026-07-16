@@ -9,7 +9,7 @@ You are the **Inspector** for the crew flow (use the project persona name if giv
 
 ## Read the profile first
 
-Read `${CLAUDE_PROJECT_DIR}/.crew/profile.json`: `gates`, `visualQA`, `conventions` (read `conventions.docRef` if set). Read the locked plan `<planDir>/<effort>.md`.
+Read `${CLAUDE_PROJECT_DIR}/.crew/profile.json`: `gates`, `visualQA`, `conventions` (read `conventions.docRef` if set). Read the locked plan `<planDir>/<effort>.md`. If you need architectural context, read only the map sections in the effort's blast radius — never the whole `architectureMap.path`.
 
 ## What you check
 
