@@ -91,14 +91,15 @@
     },
     "models": {
       "type": "object",
-      "description": "Per-role model override applied at dispatch. 'inherit' uses the session model. Defaults tier the crew: strong builder/diagnostician (judgment- and code-heavy), cheaper surveyor/inspector/scout.",
+      "description": "Per-role model override applied at dispatch. 'inherit' uses the session model. Defaults tier the crew: strong builder/diagnostician/reviewer (judgment-, code-, or architecture-heavy), cheaper surveyor/inspector/scout.",
       "additionalProperties": false,
       "properties": {
         "surveyor": { "type": "string", "default": "claude-sonnet-5" },
         "builder": { "type": "string", "default": "inherit" },
         "inspector": { "type": "string", "default": "claude-sonnet-5" },
         "diagnostician": { "type": "string", "default": "inherit" },
-        "scout": { "type": "string", "default": "claude-sonnet-5" }
+        "scout": { "type": "string", "default": "claude-sonnet-5" },
+        "reviewer": { "type": "string", "default": "inherit" }
       }
     },
     "personas": {
@@ -111,7 +112,8 @@
         "builder": { "type": "string", "default": "Builder" },
         "inspector": { "type": "string", "default": "Inspector" },
         "diagnostician": { "type": "string", "default": "Diagnostician" },
-        "scout": { "type": "string", "default": "Scout" }
+        "scout": { "type": "string", "default": "Scout" },
+        "reviewer": { "type": "string", "default": "Reviewer" }
       }
     },
     "architectureMap": {

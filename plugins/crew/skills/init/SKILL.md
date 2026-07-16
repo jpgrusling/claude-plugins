@@ -32,7 +32,7 @@ Batch-confirm the high-confidence values; interrogate everything in `needsConfir
 - **Visual QA** — is there a Storybook/dev server to check against, how is it started, is Playwright available? (`tool: none` if not.)
 - **Design source** — `figma` / `tickets` / `none`.
 - **Codegen** — does changing the API need a regen step? the command + any prerequisite (e.g. a backend must be running first).
-- **Models** — per-role tier. Propose the default tiering (strong `builder`/`diagnostician` for code and judgment; `claude-sonnet-5` for `surveyor`/`inspector`/`scout` to cut cost) unless the user's defaults already set it. Confirm rather than assume.
+- **Models** — per-role tier. Propose the default tiering (strong `builder`/`diagnostician`/`reviewer` for code, judgment, and architecture depth; `claude-sonnet-5` for `surveyor`/`inspector`/`scout` to cut cost) unless the user's defaults already set it. Confirm rather than assume.
 - **Plan dir** — default `.crew/plans`; if the repo already uses one (e.g. `.agents/plans`), offer to reuse it.
 
 ## 3 · Persona skin
@@ -43,7 +43,7 @@ Offer the shipped presets, or let the user enter their own names, or keep defaul
 cat "${CLAUDE_PLUGIN_ROOT}/reference/presets.json"
 ```
 
-Shipped presets are trademark-safe. The user can name the crew anything they like — custom names live only in their `profile.json`, never in the plugin. If the user's defaults set a skin, use it unless they want to change it here. Record all six names (foreman, surveyor, builder, inspector, diagnostician, scout) under `personas`.
+Shipped presets are trademark-safe. The user can name the crew anything they like — custom names live only in their `profile.json`, never in the plugin. If the user's defaults set a skin, use it unless they want to change it here. Record all seven names (foreman, surveyor, builder, inspector, diagnostician, scout, reviewer) under `personas`.
 
 ## 4 · Architecture map
 

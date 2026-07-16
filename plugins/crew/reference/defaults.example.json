@@ -5,7 +5,8 @@
     "builder": "inherit",
     "inspector": "claude-sonnet-5",
     "diagnostician": "inherit",
-    "scout": "claude-sonnet-5"
+    "scout": "claude-sonnet-5",
+    "reviewer": "inherit"
   },
   "personas": {
     "foreman": "Captain",
@@ -13,7 +14,8 @@
     "builder": "Engineer",
     "inspector": "Quartermaster",
     "diagnostician": "Medic",
-    "scout": "Envoy"
+    "scout": "Envoy",
+    "reviewer": "Navigator"
   },
   "visualQA": { "tool": "playwright" },
   "conventions": { "docRef": "AGENTS.md" }

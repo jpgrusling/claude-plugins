@@ -45,7 +45,8 @@
         "builder": { "type": "string", "default": "inherit" },
         "inspector": { "type": "string", "default": "claude-sonnet-5" },
         "diagnostician": { "type": "string", "default": "inherit" },
-        "scout": { "type": "string", "default": "claude-sonnet-5" }
+        "scout": { "type": "string", "default": "claude-sonnet-5" },
+        "reviewer": { "type": "string", "default": "inherit" }
       }
     },
     "personas": {
@@ -58,7 +59,8 @@
         "builder": { "type": "string" },
         "inspector": { "type": "string" },
         "diagnostician": { "type": "string" },
-        "scout": { "type": "string" }
+        "scout": { "type": "string" },
+        "reviewer": { "type": "string" }
       }
     },
     "permissions": {

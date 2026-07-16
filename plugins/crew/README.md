@@ -62,12 +62,20 @@ If the fix keeps failing QA because the diagnosis was wrong, the foreman re-open
 
 Send the **Scout** out to documentation, the web, and MCP tools; it returns a distilled, cited brief instead of a pile of pages (the raw docs stay in its context, not yours). Works standalone with no project open, and it's the same Scout the foreman/surveyor/diagnostician dispatch on-demand during the crew flows. For a heavyweight, multi-source investigation, use the `deep-research` skill instead.
 
+## Review someone else's code
+
+```
+/crew:review
+```
+
+An **interactive** review of a colleague's PR or diff — correctness, style, architecture, and design intent — grounded in your project's conventions and architecture map. It fans out parallel dimension passes (`reviewer` agent), synthesizes and de-duplicates them, then **walks the findings with you conversationally** so you decide what stands and the author learns *why*; optionally posts the agreed findings as inline PR comments (confirmed first). Distinct from the inspector: the inspector gatekeeps the crew's *own* build against a locked plan; the reviewer judges *external* code on its merits for a human author. Works with no profile, better with one.
+
 ## The crew (and skins)
 
-Agents are `surveyor`, `builder`, `inspector`, `diagnostician`, `scout` (functional names = invocation handles). The Scout is external read-only recon — it complements the surveyor's internal recon and can't touch the repo or spawn other agents. Their **display names** are skinnable per project: pick a shipped preset during `init`, or set `personas` in your profile to anything you like. Shipped presets are trademark-safe; custom names live only in your repo.
+Agents are `surveyor`, `builder`, `inspector`, `diagnostician`, `scout`, `reviewer` (functional names = invocation handles). The Scout is external read-only recon (complements the surveyor's internal recon); the Reviewer critiques others' code across four dimensions for a human author (distinct from the inspector's gatekeeping of the crew's own build). Their **display names** are skinnable per project: pick a shipped preset during `init`, or set `personas` in your profile to anything you like. Shipped presets are trademark-safe; custom names live only in your repo.
 
 ```json
-"personas": { "foreman": "Athena", "surveyor": "Hermes", "builder": "Hephaestus", "inspector": "Themis", "diagnostician": "Asclepius", "scout": "Metis" }
+"personas": { "foreman": "Athena", "surveyor": "Hermes", "builder": "Hephaestus", "inspector": "Themis", "diagnostician": "Asclepius", "scout": "Metis", "reviewer": "Mentor" }
 ```
 
 ## Keeping the map fresh
