@@ -16,7 +16,7 @@ Read `~/.claude/crew/defaults.json` if it exists — you're editing; show the us
 Confirm or set each, skipping any the user isn't interested in standardizing:
 
 - **Models** — per-role tier. The shipped tier is strong `builder`/`diagnostician` (code + judgment) and `claude-sonnet-5` for `surveyor`/`inspector` (cost). Offer it as the starting point; let them adjust any role. `inherit` = use the session model.
-- **Personas** — a skin for the seven roles (foreman, surveyor, builder, inspector, diagnostician, scout, reviewer). Offer the shipped presets (`cat "${CLAUDE_PLUGIN_ROOT}/reference/presets.json"`) or take custom names.
+- **Personas** — a skin for the ten roles (foreman, surveyor, builder, inspector, diagnostician, scout, reviewer, tester, architect, auditor). Offer the shipped presets (`cat "${CLAUDE_PLUGIN_ROOT}/reference/presets.json"`) or take custom names.
 - **Visual QA** — default `tool`: `playwright` or `none`. (Only the tool is a user default; `target`/`startCommand` are always per-project, set at init.)
 - **Plan dir** — preferred plan directory for new projects (default `.crew/plans`).
 - **Conventions** — a `docRef` filename init should look for first (e.g. `AGENTS.md`), and/or standing `notes`.

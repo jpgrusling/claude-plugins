@@ -46,7 +46,10 @@
         "inspector": { "type": "string", "default": "claude-sonnet-5" },
         "diagnostician": { "type": "string", "default": "inherit" },
         "scout": { "type": "string", "default": "claude-sonnet-5" },
-        "reviewer": { "type": "string", "default": "inherit" }
+        "reviewer": { "type": "string", "default": "inherit" },
+        "tester": { "type": "string", "default": "inherit" },
+        "architect": { "type": "string", "default": "inherit" },
+        "auditor": { "type": "string", "default": "inherit" }
       }
     },
     "personas": {
@@ -60,7 +63,10 @@
         "inspector": { "type": "string" },
         "diagnostician": { "type": "string" },
         "scout": { "type": "string" },
-        "reviewer": { "type": "string" }
+        "reviewer": { "type": "string" },
+        "tester": { "type": "string" },
+        "architect": { "type": "string" },
+        "auditor": { "type": "string" }
       }
     },
     "permissions": {

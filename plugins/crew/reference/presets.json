@@ -1,5 +1,5 @@
 {
-  "$comment": "Trademark-safe persona skins shipped with the plugin. Each maps the seven roles to display names used in narration. Bring your own skin by setting `personas` directly in .crew/profile.json (or ~/.claude/crew/defaults.json to reuse it across projects) — custom names live only in your files and are never distributed by this plugin.",
+  "$comment": "Trademark-safe persona skins shipped with the plugin. Each maps the ten persona-bearing roles to display names used in narration (the campaign skill has no persona). Bring your own skin by setting `personas` directly in .crew/profile.json (or ~/.claude/crew/defaults.json to reuse it across projects) — custom names live only in your files and are never distributed by this plugin.",
   "default": {
     "foreman": "Foreman",
     "surveyor": "Surveyor",
@@ -7,7 +7,10 @@
     "inspector": "Inspector",
     "diagnostician": "Diagnostician",
     "scout": "Scout",
-    "reviewer": "Reviewer"
+    "reviewer": "Reviewer",
+    "tester": "Tester",
+    "architect": "Architect",
+    "auditor": "Auditor"
   },
   "mythology": {
     "foreman": "Athena",
@@ -16,7 +19,10 @@
     "inspector": "Themis",
     "diagnostician": "Asclepius",
     "scout": "Metis",
-    "reviewer": "Mentor"
+    "reviewer": "Mentor",
+    "tester": "Argus",
+    "architect": "Daedalus",
+    "auditor": "Cassandra"
   },
   "expedition": {
     "foreman": "Captain",
@@ -25,7 +31,10 @@
     "inspector": "Quartermaster",
     "diagnostician": "Medic",
     "scout": "Envoy",
-    "reviewer": "Navigator"
+    "reviewer": "Navigator",
+    "tester": "Ranger",
+    "architect": "Cartographer",
+    "auditor": "Sentry"
   },
   "newsroom": {
     "foreman": "Editor",
@@ -34,7 +43,10 @@
     "inspector": "Fact-Checker",
     "diagnostician": "Investigator",
     "scout": "Correspondent",
-    "reviewer": "Critic"
+    "reviewer": "Critic",
+    "tester": "Copy Editor",
+    "architect": "Bureau Chief",
+    "auditor": "Watchdog"
   },
   "kitchen": {
     "foreman": "Head Chef",
@@ -43,7 +55,10 @@
     "inspector": "Expediter",
     "diagnostician": "Taster",
     "scout": "Purveyor",
-    "reviewer": "Judge"
+    "reviewer": "Judge",
+    "tester": "Sous-Chef",
+    "architect": "Recipe Developer",
+    "auditor": "Health Inspector"
   },
   "noir": {
     "foreman": "Chief",
@@ -52,6 +67,9 @@
     "inspector": "Inspector",
     "diagnostician": "Detective",
     "scout": "Informant",
-    "reviewer": "Internal Affairs"
+    "reviewer": "Internal Affairs",
+    "tester": "Interrogator",
+    "architect": "Strategist",
+    "auditor": "Watchman"
   }
 }

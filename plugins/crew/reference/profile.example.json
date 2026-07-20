@@ -34,7 +34,10 @@
     "inspector": "claude-sonnet-5",
     "diagnostician": "inherit",
     "scout": "claude-sonnet-5",
-    "reviewer": "inherit"
+    "reviewer": "inherit",
+    "tester": "inherit",
+    "architect": "inherit",
+    "auditor": "inherit"
   },
   "personas": {
     "foreman": "Foreman",
@@ -43,7 +46,10 @@
     "inspector": "Inspector",
     "diagnostician": "Diagnostician",
     "scout": "Scout",
-    "reviewer": "Reviewer"
+    "reviewer": "Reviewer",
+    "tester": "Tester",
+    "architect": "Architect",
+    "auditor": "Auditor"
   },
   "architectureMap": {
     "path": ".crew/architecture.md",

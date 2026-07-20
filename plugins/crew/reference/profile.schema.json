@@ -91,7 +91,7 @@
     },
     "models": {
       "type": "object",
-      "description": "Per-role model override applied at dispatch. 'inherit' uses the session model. Defaults tier the crew: strong builder/diagnostician/reviewer (judgment-, code-, or architecture-heavy), cheaper surveyor/inspector/scout.",
+      "description": "Per-role model override applied at dispatch. 'inherit' uses the session model. Defaults tier the crew: strong builder/diagnostician/reviewer/tester/architect/auditor (code, judgment, architecture, or security depth), cheaper surveyor/inspector/scout.",
       "additionalProperties": false,
       "properties": {
         "surveyor": { "type": "string", "default": "claude-sonnet-5" },
@@ -99,7 +99,10 @@
         "inspector": { "type": "string", "default": "claude-sonnet-5" },
         "diagnostician": { "type": "string", "default": "inherit" },
         "scout": { "type": "string", "default": "claude-sonnet-5" },
-        "reviewer": { "type": "string", "default": "inherit" }
+        "reviewer": { "type": "string", "default": "inherit" },
+        "tester": { "type": "string", "default": "inherit" },
+        "architect": { "type": "string", "default": "inherit" },
+        "auditor": { "type": "string", "default": "inherit" }
       }
     },
     "personas": {
@@ -113,7 +116,10 @@
         "inspector": { "type": "string", "default": "Inspector" },
         "diagnostician": { "type": "string", "default": "Diagnostician" },
         "scout": { "type": "string", "default": "Scout" },
-        "reviewer": { "type": "string", "default": "Reviewer" }
+        "reviewer": { "type": "string", "default": "Reviewer" },
+        "tester": { "type": "string", "default": "Tester" },
+        "architect": { "type": "string", "default": "Architect" },
+        "auditor": { "type": "string", "default": "Auditor" }
       }
     },
     "architectureMap": {

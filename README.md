@@ -12,7 +12,7 @@ claude plugin marketplace add jpgrusling/claude-plugins
 
 | Plugin | What it does |
 | --- | --- |
-| [**crew**](./plugins/crew) | Assemble a crew of subagents to run a design→delivery effort (survey → align → build in a worktree → inspect → integrate) or debug a complex bug (diagnose → align → fix → inspect → integrate), driven by a per-project profile you set up once with `init`. Works in any repo. |
+| [**crew**](./plugins/crew) | A profile-driven crew of subagents for the whole delivery lifecycle: assemble an effort (survey → build → inspect → integrate), debug, research, review PRs, write tests, design ADRs, security-audit, and orchestrate multi-effort campaigns. Set up once with `init`; works in any repo. |
 
 ## Install a plugin
 

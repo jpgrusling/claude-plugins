@@ -70,12 +70,19 @@ Send the **Scout** out to documentation, the web, and MCP tools; it returns a di
 
 An **interactive** review of a colleague's PR or diff — correctness, style, architecture, and design intent — grounded in your project's conventions and architecture map. It fans out parallel dimension passes (`reviewer` agent), synthesizes and de-duplicates them, then **walks the findings with you conversationally** so you decide what stands and the author learns *why*; optionally posts the agreed findings as inline PR comments (confirmed first). Distinct from the inspector: the inspector gatekeeps the crew's *own* build against a locked plan; the reviewer judges *external* code on its merits for a human author. Works with no profile, better with one.
 
+## More flows
+
+- **`/crew:test`** — the **Tester** designs a strategy, writes missing coverage, and hunts edge cases adversarially in a worktree; product-bug findings route to the builder. Also runs as an optional coverage pass inside `assemble`.
+- **`/crew:design`** — for non-trivial or novel work, the **Architect** weighs approaches and tradeoffs and returns a design; you align it; the foreman persists an ADR. Routine work skips this and goes straight to `assemble`.
+- **`/crew:audit`** — the **Security Auditor** runs a threat-model / authz / injection / secrets / deps pass (wrapping the shipped `security-review` skill) and returns severity-ranked findings with concrete exploit scenarios, walked with you.
+- **`/crew:campaign`** — orchestrates a large initiative: the Architect decomposes it into ordered efforts, you align the breakdown, then it sequences `assemble`/`debug` runs with a checkpoint between each (parallel only where efforts don't overlap).
+
 ## The crew (and skins)
 
-Agents are `surveyor`, `builder`, `inspector`, `diagnostician`, `scout`, `reviewer` (functional names = invocation handles). The Scout is external read-only recon (complements the surveyor's internal recon); the Reviewer critiques others' code across four dimensions for a human author (distinct from the inspector's gatekeeping of the crew's own build). Their **display names** are skinnable per project: pick a shipped preset during `init`, or set `personas` in your profile to anything you like. Shipped presets are trademark-safe; custom names live only in your repo.
+Agents are `surveyor`, `builder`, `inspector`, `diagnostician`, `scout`, `reviewer`, `tester`, `architect`, `auditor` (functional names = invocation handles). The Scout is external read-only recon; the Reviewer critiques others' code for a human author; the Tester authors coverage; the Architect designs before building; the Auditor is a security lens. Their **display names** are skinnable per project: pick a shipped preset during `init`, or set `personas` in your profile to anything you like. Shipped presets are trademark-safe; custom names live only in your repo.
 
 ```json
-"personas": { "foreman": "Athena", "surveyor": "Hermes", "builder": "Hephaestus", "inspector": "Themis", "diagnostician": "Asclepius", "scout": "Metis", "reviewer": "Mentor" }
+"personas": { "foreman": "Athena", "surveyor": "Hermes", "builder": "Hephaestus", "inspector": "Themis", "diagnostician": "Asclepius", "scout": "Metis", "reviewer": "Mentor", "tester": "Argus", "architect": "Daedalus", "auditor": "Cassandra" }
 ```
 
 ## Keeping the map fresh

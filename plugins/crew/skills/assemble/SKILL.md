@@ -24,8 +24,12 @@ Dispatch by functional handle; apply the profile's `models` override at dispatch
 | Builder | `builder` | worktree |
 | Inspector | `inspector` | reads the worktree |
 | Scout | `scout` | none (read-only, external) — on-demand, not a pipeline stage |
+| Tester | `tester` | works in the builder's worktree — optional coverage pass |
+| Auditor | `auditor` | none (read-only) — optional, for security-sensitive efforts |
 
 **Scout (on-demand research).** When an external question comes up — a library's current API, a config syntax, whether a pattern is still recommended — dispatch the `scout` for a distilled, cited brief so the raw docs never fill your context. It's not a numbered step; you dispatch it during survey/alignment as needed, and the surveyor may also dispatch it inline. For a heavyweight, multi-source investigation, use the `deep-research` skill instead.
+
+**Optional passes.** For an effort where coverage matters, dispatch the `tester` at the builder's worktree after build for an adversarial test pass (see `/crew:test`); route any product-bug findings back through the ladder. For a security-sensitive effort, dispatch the `auditor` (see `/crew:audit`). Both are optional — reach for them when the effort warrants, not by default. Dedicated design (`/crew:design`) and multi-effort orchestration (`/crew:campaign`) live in their own skills.
 
 ## Quick-hits (skip the pipeline)
 

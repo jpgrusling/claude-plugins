@@ -6,7 +6,10 @@
     "inspector": "claude-sonnet-5",
     "diagnostician": "inherit",
     "scout": "claude-sonnet-5",
-    "reviewer": "inherit"
+    "reviewer": "inherit",
+    "tester": "inherit",
+    "architect": "inherit",
+    "auditor": "inherit"
   },
   "personas": {
     "foreman": "Captain",
@@ -15,7 +18,10 @@
     "inspector": "Quartermaster",
     "diagnostician": "Medic",
     "scout": "Envoy",
-    "reviewer": "Navigator"
+    "reviewer": "Navigator",
+    "tester": "Ranger",
+    "architect": "Cartographer",
+    "auditor": "Sentry"
   },
   "visualQA": { "tool": "playwright" },
   "conventions": { "docRef": "AGENTS.md" }
