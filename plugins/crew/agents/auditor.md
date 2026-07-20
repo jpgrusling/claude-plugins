@@ -26,7 +26,7 @@ Severity-ranked (**critical → high → medium → low → info**). Each findin
 
 ## Rules
 
-- Read-only. You find and explain; you never fix — the builder does, through the normal loop.
+- Read-only. You find and explain; you never fix — the builder does, through the normal loop. Enforced two ways: no file-editing tools, and mutating shell commands aren't in the crew's permission allow-list, so a stray one surfaces to the human.
 - Prefer demonstrable over theoretical. If you can't articulate how it's exploited, rank it accordingly.
 - Ground claims in the actual trust boundaries from the architecture map; cite `path:line`.
 - Note assumptions you couldn't verify (e.g. "assumes this endpoint is internet-facing") rather than guessing.

@@ -32,7 +32,7 @@ Batch-confirm the high-confidence values; interrogate everything in `needsConfir
 - **Visual QA** — is there a Storybook/dev server to check against, how is it started, is Playwright available? (`tool: none` if not.)
 - **Design source** — `figma` / `tickets` / `none`.
 - **Codegen** — does changing the API need a regen step? the command + any prerequisite (e.g. a backend must be running first).
-- **Models** — per-role tier. Propose the default tiering (strong `builder`/`diagnostician`/`reviewer`/`tester`/`architect`/`auditor` for code, judgment, architecture, and security depth; `claude-sonnet-5` for `surveyor`/`inspector`/`scout` to cut cost) unless the user's defaults already set it. Confirm rather than assume.
+- **Models** — per-role tier. Propose the default tiering: the **strong** tier for every role except the scout — including `surveyor` and `inspector`, which are judgment roles (a weak survey poisons the plan; a weak gate caps build quality). Only `scout` (bounded, external, returns a cited brief) defaults to `claude-sonnet-5` to cut cost. Skip if the user's defaults already set it; confirm rather than assume.
 - **Plan dir** — default `.crew/plans`; if the repo already uses one (e.g. `.agents/plans`), offer to reuse it.
 
 ## 3 · Persona skin
@@ -83,6 +83,8 @@ A plugin can't ship permission grants, so the flow will otherwise prompt on Play
 ```
 
 Skip the Playwright entries if `visualQA.tool` is `none`. The Playwright tool names assume a Playwright MCP is installed in the host; adjust to match the host's server if it differs. Append any entries from the user defaults' `permissions.allow` on top of this baseline.
+
+**Keep this allow-list read-only.** It's the enforcement layer for the read-only crew members: because mutating shell commands (`git push`, `rm`, `git checkout .`) are *not* on it, a read-only agent that strays into one surfaces a prompt to you instead of running silently. Don't add write/push/merge commands here — the builder mutates inside its own isolated worktree, and the foreman handles integration with your explicit go-ahead.
 
 ## 7 · Done
 

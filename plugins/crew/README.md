@@ -15,7 +15,7 @@ claude plugin install crew@jpgrusling
 /crew:init
 ```
 
-`init` runs a read-only detector (package manager, task runner, trunk, gate commands, protected paths, codegen, visual-QA target), confirms it with you, asks the few things it can't detect (conventions, design source), lets you pick a **persona skin**, proposes a **model tier** (strong builder/diagnostician, cheaper sonnet surveyor/inspector), generates a project **architecture map**, and writes it all to a committed `.crew/profile.json` + `.crew/architecture.md`.
+`init` runs a read-only detector (package manager, task runner, trunk, gate commands, protected paths, codegen, visual-QA target), confirms it with you, asks the few things it can't detect (conventions, design source), lets you pick a **persona skin**, proposes a **model tier** (strong across the board except a cheaper scout — survey and QA-gate are judgment roles and stay strong), generates a project **architecture map**, and writes it all to a committed `.crew/profile.json` + `.crew/architecture.md`.
 
 A plugin can't grant its own permissions, so `init` prints the entries to add to your repo's `.claude/settings.json` (a couple of git reads + your Playwright MCP tools) and offers to add them for you.
 
@@ -96,6 +96,8 @@ The architecture map is stamped with the commit it was built at. The `surveyor` 
 - [`reference/defaults.schema.json`](./reference/defaults.schema.json) — the user-defaults contract (`~/.claude/crew/defaults.json`)
 - [`reference/defaults.example.json`](./reference/defaults.example.json) — a filled defaults example
 - [`reference/presets.json`](./reference/presets.json) — the shipped persona skins
+- [`reference/PRINCIPLES.md`](./reference/PRINCIPLES.md) — the design principles the crew is built on
+- [`reference/routing.md`](./reference/routing.md) — which skill/role for which situation
 
 ## License
 

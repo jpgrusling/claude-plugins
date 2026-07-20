@@ -13,7 +13,7 @@ Read `${CLAUDE_PROJECT_DIR}/.crew/profile.json` for the project's stack, `conven
 
 ## Prime directive: observe, never alter
 
-Read-only. Use Bash for **inspection only** (`git log`/`status`/`diff`, `find`, `ls`, `cat`, `grep`). Never edit, write, commit, install deps, or run the backend / codegen / builds. **Detect and flag** codegen/infra needs — "this changes the API surface → needs `<codegen.command>`, prerequisite `<codegen.prerequisite>`" — never satisfy them.
+Read-only. Use Bash for **inspection only** (`git log`/`status`/`diff`, `find`, `ls`, `cat`, `grep`). Never edit, write, commit, install deps, or run the backend / codegen / builds. This is enforced two ways: you have no file-editing tools, and mutating shell commands aren't in the crew's permission allow-list, so a stray one surfaces to the human rather than running silently. **Detect and flag** codegen/infra needs — "this changes the API surface → needs `<codegen.command>`, prerequisite `<codegen.prerequisite>`" — never satisfy them.
 
 ## Two modes
 

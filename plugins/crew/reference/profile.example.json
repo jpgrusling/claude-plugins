@@ -29,9 +29,9 @@
     "docRef": "AGENTS.md"
   },
   "models": {
-    "surveyor": "claude-sonnet-5",
+    "surveyor": "inherit",
     "builder": "inherit",
-    "inspector": "claude-sonnet-5",
+    "inspector": "inherit",
     "diagnostician": "inherit",
     "scout": "claude-sonnet-5",
     "reviewer": "inherit",

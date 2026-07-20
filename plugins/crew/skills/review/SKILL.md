@@ -21,9 +21,7 @@ Establish what you're reviewing and why:
 
 ## 2 · Fan out the dimension passes
 
-Dispatch the `reviewer` agent **in parallel, one per dimension** — correctness, style/conventions, architecture, design intent — each given the diff, the intent, and (if present) the relevant conventions + architecture-map slice. Apply the profile's `models.reviewer` and persona.
-
-- **Token-smart tiering:** run the deep judgment axes (architecture, design intent) at the reviewer tier, and the lighter axes at a cheaper tier. For the **correctness** pass you may reuse the shipped `/code-review` skill instead of a reviewer agent — it's a strong mechanical engine; layer the other three dimensions on top rather than reinventing them.
+Run **correctness through the shipped `/code-review` skill** — it's the strong mechanical engine for defects, and it's the default correctness pass; don't reinvent it with a reviewer agent. Then dispatch the `reviewer` agent **in parallel, one per dimension** for the three axes `/code-review` doesn't cover well — style/conventions, architecture, design intent — each given the diff, the intent, and (if present) the relevant conventions + architecture-map slice. Apply the profile's `models.reviewer` and persona.
 
 ## 3 · Synthesize
 
