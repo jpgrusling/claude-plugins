@@ -22,7 +22,7 @@ Confirm or set each, skipping any the user isn't interested in standardizing:
 
 - **Models** *(live)* — per-role tier, resolved at dispatch. The shipped tier runs every role at the **strong** tier except `scout`, which defaults to `claude-sonnet-5` (bounded and external). Surveyor and inspector are judgment roles, so they stay strong. Offer it as the starting point; let them adjust any role. `inherit` = use the session model.
 - **Personas** *(live)* — a skin for the ten roles (foreman, surveyor, builder, inspector, diagnostician, scout, reviewer, tester, architect, auditor). Offer the shipped presets (`cat "${CLAUDE_PLUGIN_ROOT}/reference/presets.json"`) or take custom names. This is your default skin everywhere; a project can still pin its own at init.
-- **Visual QA** *(live)* — `tool`: `playwright` or `none` (default `none`). Only the tool is a preference; `target`/`startCommand` are always per-project, set at init.
+- **Visual QA** *(live)* — `tool`: `playwright` or `none` (default `playwright`; set `none` if you don't run Playwright). Only the tool is a preference; `target`/`startCommand` are always per-project, set at init.
 - **Plan dir** *(seed)* — preferred plan directory for new projects (default `.crew/plans`).
 - **Conventions** *(seed)* — a `docRef` filename init should look for first (e.g. `AGENTS.md`), and/or standing `notes`.
 - **Permissions** *(seed)* — extra `permissions.allow` entries init should append on top of the plugin baseline (e.g. Bash allowlist entries you always grant the crew).

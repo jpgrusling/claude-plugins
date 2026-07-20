@@ -46,7 +46,7 @@
     },
     "visualQA": {
       "type": "object",
-      "description": "LIVE. Your standing visual-QA driver. Only `tool` is a preference (resolved profile pin > this > default `none`); `target`/`startCommand` are project facts, always set per-project at init.",
+      "description": "LIVE. Your standing visual-QA driver. Only `tool` is a preference (resolved profile pin > this > default `playwright`); `target`/`startCommand` are project facts, always set per-project at init. Set `none` if you don't run Playwright.",
       "additionalProperties": false,
       "properties": {
         "tool": { "type": "string", "enum": ["playwright", "none"] }

@@ -64,7 +64,7 @@
     },
     "visualQA": {
       "type": "object",
-      "description": "How the inspector visually checks UI work. `target`/`startCommand` are project facts, always set here. `tool` is normally omitted — it resolves at runtime from your ~/.claude/crew/preferences.json (default `none`); set it here only to PIN a tool for the whole project.",
+      "description": "How the inspector visually checks UI work. `target`/`startCommand` are project facts, always set here. `tool` is normally omitted — it resolves at runtime from your ~/.claude/crew/preferences.json (default `playwright`; visual QA only actually runs when a `target` is set); set it here only to PIN a tool for the whole project.",
       "additionalProperties": false,
       "properties": {
         "tool": { "type": "string", "enum": ["playwright", "none"] },
