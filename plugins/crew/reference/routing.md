@@ -6,6 +6,7 @@ Which skill to reach for, and which role does the work. The crew has nine agents
 
 | You have… | Use | What runs |
 | --- | --- | --- |
+| No idea where to start, or you're onboarding | `/crew:guide` | state-aware concierge: reads your setup, explains, points you at the right skill (read-only) |
 | A design/ticket to build, cause understood | `/crew:assemble` | survey → align → build → inspect → integrate |
 | A tiny, unambiguous change | `/crew:assemble` (quick-hit) | foreman does it inline; still confirms before pushing |
 | A bug whose **cause is unknown** | `/crew:debug` | diagnose → align on proven cause → build → inspect → integrate |

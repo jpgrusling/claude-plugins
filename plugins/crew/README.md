@@ -9,6 +9,14 @@ claude plugin marketplace add jpgrusling/claude-plugins
 claude plugin install crew@jpgrusling
 ```
 
+## New here?
+
+```
+/crew:guide
+```
+
+An interactive, read-only concierge: it reads your project's `.crew/` profile and your preferences, tells you what this project's crew is set up to do, and points you at the right skill for whatever you're trying to accomplish — without doing the work itself. The fastest way to onboard a teammate to a repo that already uses the crew.
+
 ## Set up a project (once)
 
 ```
