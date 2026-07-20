@@ -2,7 +2,7 @@
   "name": "crew",
   "displayName": "Crew",
   "description": "Assemble a crew of subagents to run a single design→delivery effort — survey → align → build in an isolated worktree → inspect (autonomous QA loop) → integrate. Project-specific knowledge (gates, conventions, codegen, visual QA) is discovered once by `init` and persisted to a committed .crew/ profile, so the same flow runs in any repo.",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "author": {
     "name": "JP Grusling",
     "url": "https://github.com/jpgrusling"
