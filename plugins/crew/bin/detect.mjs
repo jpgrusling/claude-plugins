@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // crew: read-only project detection. Emits a facts JSON to stdout that the
-// `init` skill presents and confirms. Never writes anything. JS/TS-first; records
-// non-JS stacks as a warning rather than pretending to understand them.
+// `init` skill presents and confirms. Never writes anything. JS/TS-first, with a
+// best-effort polyglot pass (Makefile/justfile targets + Rust/Go/Python
+// conventions) for gate commands — all flagged for confirmation.
 
 import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
@@ -64,6 +65,7 @@ const monorepo = Boolean(pkg.workspaces) || has('pnpm-workspace.yaml') || taskRu
 const stack = []
 if (has('tsconfig.json')) stack.push('typescript')
 if (pkg.name || has('jsconfig.json')) stack.push('javascript')
+const nonJsLangs = new Set()
 for (const [file, name] of [
   ['Cargo.toml', 'rust'],
   ['go.mod', 'go'],
@@ -72,10 +74,9 @@ for (const [file, name] of [
   ['pom.xml', 'java'],
   ['Gemfile', 'ruby'],
 ]) {
-  if (has(file)) {
-    warnings.push(`Non-JS stack file present (${file} → ${name}): v1 detection is JS/TS-first, so gates/conventions for it need to be entered by hand.`)
-  }
+  if (has(file)) nonJsLangs.add(name)
 }
+for (const l of nonJsLangs) if (!stack.includes(l)) stack.push(l)
 
 // gate commands from package.json scripts
 const run = s => (packageManager ? `${packageManager} run ${s}` : `npm run ${s}`)
@@ -92,6 +93,92 @@ const gateGuess = {
 for (const [gate, script] of Object.entries(gateGuess)) {
   gates[gate] = script ? run(script) : ''
   mark(`gates.${gate}`, script ? (script === gate || script === gate.replace('Write', ':write') ? 'high' : 'medium') : 'low')
+}
+
+// polyglot gate fill: for stacks package.json scripts don't cover, guess from a
+// Makefile/justfile's targets first, then language conventions. Best-effort and
+// always flagged for confirmation — a JS script, if present, wins.
+const makeRunner =
+  has('Makefile') || has('makefile') ? 'make' : has('justfile') || has('.justfile') ? 'just' : null
+const targets = new Set()
+if (makeRunner) {
+  for (const f of ['Makefile', 'makefile', 'justfile', '.justfile']) {
+    if (!has(f)) continue
+    try {
+      for (const line of readFileSync(join(dir, f), 'utf8').split('\n')) {
+        if (line.startsWith('\t') || line.startsWith('.')) continue
+        const m = line.match(/^([a-zA-Z0-9_-]+)[^=:]*:(?!=)/)
+        if (m) targets.add(m[1])
+      }
+    } catch {}
+  }
+}
+const targetFor = (...names) => names.find(n => targets.has(n))
+
+const pyText = ['pyproject.toml', 'requirements.txt', 'setup.cfg', 'tox.ini']
+  .map(f => {
+    try {
+      return has(f) ? readFileSync(join(dir, f), 'utf8') : ''
+    } catch {
+      return ''
+    }
+  })
+  .join('\n')
+const pyHas = t => pyText.includes(t)
+
+const langGates = {}
+if (nonJsLangs.has('rust'))
+  Object.assign(langGates, {
+    lint: 'cargo clippy',
+    format: 'cargo fmt --check',
+    formatWrite: 'cargo fmt',
+    typecheck: 'cargo check',
+    build: 'cargo build',
+    test: 'cargo test',
+  })
+if (nonJsLangs.has('go'))
+  Object.assign(langGates, {
+    lint: 'go vet ./...',
+    format: 'gofmt -l .',
+    formatWrite: 'gofmt -w .',
+    build: 'go build ./...',
+    test: 'go test ./...',
+  })
+if (nonJsLangs.has('python'))
+  Object.assign(langGates, {
+    lint: pyHas('ruff') ? 'ruff check .' : '',
+    format: pyHas('ruff') ? 'ruff format --check .' : pyHas('black') ? 'black --check .' : '',
+    formatWrite: pyHas('ruff') ? 'ruff format .' : pyHas('black') ? 'black .' : '',
+    typecheck: pyHas('mypy') ? 'mypy .' : pyHas('pyright') ? 'pyright' : '',
+    test: pyHas('pytest') ? 'pytest' : '',
+    build: pyHas('build') ? 'python -m build' : '',
+  })
+
+const gateTargets = {
+  lint: ['lint'],
+  format: ['format', 'fmt', 'format-check', 'fmt-check'],
+  formatWrite: ['format-write', 'fmt-write', 'format-fix'],
+  typecheck: ['typecheck', 'type-check', 'check'],
+  build: ['build'],
+  test: ['test'],
+}
+const langConf = nonJsLangs.has('rust') || nonJsLangs.has('go') ? 'medium' : 'low'
+for (const gate of Object.keys(gateGuess)) {
+  if (gates[gate]) continue // a JS script wins
+  const tgt = targetFor(...gateTargets[gate])
+  if (tgt) {
+    gates[gate] = `${makeRunner} ${tgt}`
+    mark(`gates.${gate}`, 'medium')
+  } else if (langGates[gate]) {
+    gates[gate] = langGates[gate]
+    mark(`gates.${gate}`, langConf)
+  }
+}
+
+if (nonJsLangs.size) {
+  warnings.push(
+    `Non-JS stack detected (${[...nonJsLangs].join(', ')}): gate commands are inferred best-effort from ${makeRunner ? `the ${makeRunner}file and ` : ''}language conventions — confirm them before relying on them.`,
+  )
 }
 
 // linter / formatter tooling (informational)

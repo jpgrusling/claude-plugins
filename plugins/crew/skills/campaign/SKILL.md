@@ -28,6 +28,7 @@ Read `${CLAUDE_PROJECT_DIR}/.crew/profile.json`. **If it's missing, stop** and o
 
 - One initiative, many efforts — but each effort is still a full, checkpointed `assemble`/`debug` run. Don't skip alignment or QA to go faster.
 - Never parallelize efforts that touch overlapping files; sequence them.
+- Give each effort a unique kebab-case slug (ticket id or short summary) so parallel plan files never collide.
 - Checkpoint between efforts — never chain the whole campaign without human go/no-go.
 - Keep the campaign plan's per-effort status current; it's the source of truth if the session is interrupted and resumed.
 - All the usual guardrails hold per effort: no push/merge without confirmation, never stage `protected` paths.

@@ -33,17 +33,21 @@ Dispatch by functional handle; apply the profile's `models` override at dispatch
 
 ## Quick-hits (skip the pipeline)
 
-Small, low-risk, unambiguous change? Do it inline: assume the current branch, edit, run the profile's gates (verify they pass), commit as a focused unit **without asking** — but **confirm before pushing**. Never stage `protected` paths. Delegate only when the work is substantial or benefits from isolation/parallelism.
+Small, low-risk, unambiguous change? Do it inline: assume the current branch, edit, run the profile's gates (verify they pass), commit as a focused unit **without asking** — but **confirm before pushing**. Never stage `protected` paths. A change is **not** a quick-hit if it needs visual QA, changes the API surface (triggering `codegen`), or touches `protected` paths — those earn the full pipeline. Delegate only when the work is substantial or benefits from isolation/parallelism.
 
 ## The pipeline
 
 1. **Intake (live)** — user drops a design/ticket link + brief. (If `designSource` is `figma`, expect a node.)
-2. **Survey (`surveyor`)** — dispatch with the link + brief; it returns recon (design breakdown, diff-vs-current, reuse map, blast radius incl. codegen/infra flags, risks, initial plan, hard questions). Seed `<planDir>/<effort>.md` with its findings.
+2. **Survey (`surveyor`)** — dispatch with the link + brief; it returns recon (design breakdown, diff-vs-current, reuse map, blast radius incl. codegen/infra flags, risks, initial plan, hard questions). Seed `<planDir>/<effort>.md` with its findings, where `<effort>` is a short kebab-case slug (the ticket id if there is one, else a 2–4-word summary) — keep it unique so parallel efforts never share a plan file.
 3. **Alignment (live)** — walk the hard questions, lock the plan into the plan file, set status `aligned`.
 4. **Build (`builder`, worktree)** — dispatch pointing at the plan file; it installs deps first, builds to the plan, runs the profile's gates, never pushes.
 5. **QA loop (`inspector` → `builder`, autonomous, ladder-bounded)** — the inspector runs the gates + visual QA (per `visualQA`) and returns ranked findings; route each back through the escalation ladder until clean or a finding escalates to you. No round cap.
 6. **Manual QA (live)** — final acceptance; use Playwright for visual checks when `visualQA.tool` is `playwright`. Findings feed the same ladder; route them back, don't hand-fix.
 7. **Integration (you, on explicit go-ahead)** — **recommend `--ff` vs `--no-ff` and confirm before merging**; pre-flight (`git log <trunk>..<branch>`, file-overlap across parallel efforts, no protected files); merge into `trunk`; **push is pause-and-confirm**; clean up (kill worktree dev servers, `git worktree remove --force`, delete the branch, `git worktree prune`, clear scratch); set the plan status `integrated`.
+
+## Capture what recurred (learning loop)
+
+After integration, if the QA loop kept flagging the same convention gap or the builder repeated a mistake the profile could have prevented, offer to record it in the profile's `conventions.notes` (confirm before writing). A crew that folds its own findings back into the profile gets sharper each effort. Skip it when nothing recurred — don't pad the conventions with one-offs.
 
 ## Escalation ladder (per distinct finding)
 
