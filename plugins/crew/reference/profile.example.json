@@ -19,7 +19,6 @@
     "prerequisite": "backend dev server running (schema is introspected live)"
   },
   "visualQA": {
-    "tool": "playwright",
     "target": "storybook",
     "startCommand": "pnpm run storybook"
   },
@@ -27,29 +26,6 @@
   "conventions": {
     "notes": "Use the `cn` helper for classnames. Named breakpoints only. Design tokens are source-of-truth; never hand-edit generated CSS. Keep comments minimal.",
     "docRef": "AGENTS.md"
-  },
-  "models": {
-    "surveyor": "inherit",
-    "builder": "inherit",
-    "inspector": "inherit",
-    "diagnostician": "inherit",
-    "scout": "claude-sonnet-5",
-    "reviewer": "inherit",
-    "tester": "inherit",
-    "architect": "inherit",
-    "auditor": "inherit"
-  },
-  "personas": {
-    "foreman": "Foreman",
-    "surveyor": "Surveyor",
-    "builder": "Builder",
-    "inspector": "Inspector",
-    "diagnostician": "Diagnostician",
-    "scout": "Scout",
-    "reviewer": "Reviewer",
-    "tester": "Tester",
-    "architect": "Architect",
-    "auditor": "Auditor"
   },
   "architectureMap": {
     "path": ".crew/architecture.md",

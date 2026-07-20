@@ -37,7 +37,7 @@ This structure is what lets the builder/inspector/diagnostician load only the se
 
 ## Dispatching the Scout
 
-When recon turns on an **external** question — a library's current API, a config syntax, whether a pattern is still recommended — you may dispatch the `scout` agent inline for a *tight, single* lookup, applying the profile's `models.scout` and persona. Fold its cited brief into your report; don't paste raw docs. Keep it to genuine external unknowns — repo/design questions are yours to answer directly, and a sprawling investigation belongs to the `deep-research` skill, not an inline Scout.
+When recon turns on an **external** question — a library's current API, a config syntax, whether a pattern is still recommended — you may dispatch the `scout` agent inline for a *tight, single* lookup, applying the scout model and persona the foreman passed you (or the default if none). Fold its cited brief into your report; don't paste raw docs. Keep it to genuine external unknowns — repo/design questions are yours to answer directly, and a sprawling investigation belongs to the `deep-research` skill, not an inline Scout.
 
 ## Rules
 

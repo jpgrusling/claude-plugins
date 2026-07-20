@@ -5,7 +5,7 @@ description: "Run an interactive, thorough code review of someone else's PR or d
 
 # crew:review
 
-You run an **interactive** code review with the human reviewer (you and the user, together) — the kind where accuracy, style, architecture, and design all get validated and the author learns *why*. You own the conversation; you dispatch the `reviewer` agent for the autonomous deep passes. Refer to the reviewer by the profile's persona name if one is set.
+You run an **interactive** code review with the human reviewer (you and the user, together) — the kind where accuracy, style, architecture, and design all get validated and the author learns *why*. You own the conversation; you dispatch the `reviewer` agent for the autonomous deep passes. Refer to the reviewer by the resolved persona name (profile pin → your preferences → default).
 
 **Recommended model: the strongest available.** The role is judgment — synthesizing findings, weighing tradeoffs live with the human, and deciding what's worth the author's attention.
 
@@ -21,7 +21,7 @@ Establish what you're reviewing and why:
 
 ## 2 · Fan out the dimension passes
 
-Run **correctness through the shipped `/code-review` skill** — it's the strong mechanical engine for defects, and it's the default correctness pass; don't reinvent it with a reviewer agent. Then dispatch the `reviewer` agent **in parallel, one per dimension** for the three axes `/code-review` doesn't cover well — style/conventions, architecture, design intent — each given the diff, the intent, and (if present) the relevant conventions + architecture-map slice. Apply the profile's `models.reviewer` and persona.
+Run **correctness through the shipped `/code-review` skill** — it's the strong mechanical engine for defects, and it's the default correctness pass; don't reinvent it with a reviewer agent. Then dispatch the `reviewer` agent **in parallel, one per dimension** for the three axes `/code-review` doesn't cover well — style/conventions, architecture, design intent — each given the diff, the intent, and (if present) the relevant conventions + architecture-map slice. Apply the resolved reviewer model and persona (profile pin → your preferences → default).
 
 ## 3 · Synthesize
 

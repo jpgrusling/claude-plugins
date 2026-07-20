@@ -64,7 +64,7 @@
     },
     "visualQA": {
       "type": "object",
-      "description": "How the inspector visually checks UI work.",
+      "description": "How the inspector visually checks UI work. `target`/`startCommand` are project facts, always set here. `tool` is normally omitted — it resolves at runtime from your ~/.claude/crew/preferences.json (default `none`); set it here only to PIN a tool for the whole project.",
       "additionalProperties": false,
       "properties": {
         "tool": { "type": "string", "enum": ["playwright", "none"] },
@@ -91,7 +91,7 @@
     },
     "models": {
       "type": "object",
-      "description": "Per-role model override applied at dispatch. 'inherit' uses the session model. Only the scout defaults to a cheaper tier (it's bounded, external, and returns a cited brief); every other role — including surveyor and inspector — runs at the strong tier, because the survey seeds the whole plan and the inspector is the quality gate, and both are judgment calls.",
+      "description": "Optional per-project PIN of model tiers. Normally OMITTED — models resolve at dispatch from your ~/.claude/crew/preferences.json, else the plugin default. Set here only to pin a tier for the whole project (e.g. force a strong builder regardless of who runs it). 'inherit' uses the session model; only scout defaults cheaper, because surveyor and inspector are judgment roles.",
       "additionalProperties": false,
       "properties": {
         "surveyor": { "type": "string", "default": "inherit" },
@@ -107,7 +107,7 @@
     },
     "personas": {
       "type": "object",
-      "description": "Display names for each role, used in narration only (invocation handles stay functional). Set by a preset skin or free-text during init.",
+      "description": "Optional per-project PIN of display names (narration only; invocation handles stay functional). Normally OMITTED — personas resolve at dispatch from your ~/.claude/crew/preferences.json, else the plugin default. Set here only when init offers to pin a skin so the whole team narrates the same names.",
       "additionalProperties": false,
       "properties": {
         "foreman": { "type": "string", "default": "Foreman" },

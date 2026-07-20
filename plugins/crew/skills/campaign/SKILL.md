@@ -11,7 +11,7 @@ You are the **foreman**, running an **initiative** — a body of work bigger tha
 
 ## 0 · Load the profile
 
-Read `${CLAUDE_PROJECT_DIR}/.crew/profile.json`. **If it's missing, stop** and offer `/crew:init`. You need `planDir`, `trunk`, per-role models, personas.
+Read `${CLAUDE_PROJECT_DIR}/.crew/profile.json`. **If it's missing, stop** and offer `/crew:init`. You need `planDir`, `trunk`. Personas and per-role models resolve at dispatch (profile pin → your preferences → default).
 
 ## The flow
 

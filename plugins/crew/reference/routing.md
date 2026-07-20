@@ -17,7 +17,7 @@ Which skill to reach for, and which role does the work. The crew has nine agents
 | An external question (a library API, a changelog) | `/crew:research` | scout returns a cited brief |
 | A heavyweight, multi-source investigation | `deep-research` skill | (hand off — bigger than the scout) |
 | Toolchain setup for a new repo | `/crew:init` | detect → confirm → write the profile + map |
-| Standing preferences across repos | `/crew:defaults` | user-level defaults init layers under detection |
+| Standing preferences (skin, model tier, visual-QA tool) | `/crew:preferences` | live prefs the foreman resolves each run; init also seeds planDir/conventions/permissions |
 | A stale architecture map | `/crew:resync` | surveyor rebuilds the whole map |
 
 ## The read-only analyst roles — how they differ

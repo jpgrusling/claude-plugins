@@ -15,13 +15,13 @@ claude plugin install crew@jpgrusling
 /crew:init
 ```
 
-`init` runs a read-only detector (package manager, task runner, trunk, gate commands, protected paths, codegen, visual-QA target), confirms it with you, asks the few things it can't detect (conventions, design source), lets you pick a **persona skin**, proposes a **model tier** (strong across the board except a cheaper scout — survey and QA-gate are judgment roles and stay strong), generates a project **architecture map**, and writes it all to a committed `.crew/profile.json` + `.crew/architecture.md`.
+`init` runs a read-only detector (package manager, task runner, trunk, gate commands, protected paths, codegen, visual-QA target), confirms it with you, asks the few things it can't detect (conventions, design source), optionally **pins a persona skin or model tier** for the project if you want to be prescriptive, generates a project **architecture map**, and writes the project facts to a committed `.crew/profile.json` + `.crew/architecture.md`. Your personal skin, model tier, and visual-QA tool live in `~/.claude/crew/preferences.json` and resolve at runtime, so they're never baked into each repo.
 
 A plugin can't grant its own permissions, so `init` prints the entries to add to your repo's `.claude/settings.json` (a couple of git reads + your Playwright MCP tools) and offers to add them for you.
 
 ### Carry preferences across projects
 
-Run `/crew:defaults` to set standing preferences — model tier, persona skin, visual-QA tool, conventions doc, extra permissions — written to `~/.claude/crew/defaults.json`. `init` layers them **under** detection (`project profile > detected > your defaults > plugin defaults`) so new projects start from your choices and only interview the gaps. (It's user-scoped and works with no project open.)
+Run `/crew:preferences` to set standing preferences at `~/.claude/crew/preferences.json`. Your **persona skin, per-role model tier, and visual-QA tool** are *live* — the foreman resolves them on every run (`project pin > your preferences > plugin default`), so they're never committed to a repo and a change applies everywhere at once. Your **plan dir, conventions doc, and extra permissions** are *seeds* — `init` copies them into a new project's committed profile. A project can still **pin** a skin or tier in its profile to be prescriptive for the whole team. (User-scoped; works with no project open.)
 
 ## Run an effort
 
@@ -79,7 +79,7 @@ An **interactive** review of a colleague's PR or diff — correctness, style, ar
 
 ## The crew (and skins)
 
-Agents are `surveyor`, `builder`, `inspector`, `diagnostician`, `scout`, `reviewer`, `tester`, `architect`, `auditor` (functional names = invocation handles). The Scout is external read-only recon; the Reviewer critiques others' code for a human author; the Tester authors coverage; the Architect designs before building; the Auditor is a security lens. Their **display names** are skinnable per project: pick a shipped preset during `init`, or set `personas` in your profile to anything you like. Shipped presets are trademark-safe; custom names live only in your repo.
+Agents are `surveyor`, `builder`, `inspector`, `diagnostician`, `scout`, `reviewer`, `tester`, `architect`, `auditor` (functional names = invocation handles). The Scout is external read-only recon; the Reviewer critiques others' code for a human author; the Tester authors coverage; the Architect designs before building; the Auditor is a security lens. Their **display names** are skinnable: set a skin in your `~/.claude/crew/preferences.json` (applies everywhere), or **pin** one in a project's `.crew/profile.json` to standardize it for the team. Pick a shipped preset or name them anything; shipped presets are trademark-safe, custom names live only in your files.
 
 ```json
 "personas": { "foreman": "Athena", "surveyor": "Hermes", "builder": "Hephaestus", "inspector": "Themis", "diagnostician": "Asclepius", "scout": "Metis", "reviewer": "Mentor", "tester": "Argus", "architect": "Daedalus", "auditor": "Cassandra" }
@@ -93,8 +93,8 @@ The architecture map is stamped with the commit it was built at. The `surveyor` 
 
 - [`reference/profile.schema.json`](./reference/profile.schema.json) — the profile contract
 - [`reference/profile.example.json`](./reference/profile.example.json) — a filled example
-- [`reference/defaults.schema.json`](./reference/defaults.schema.json) — the user-defaults contract (`~/.claude/crew/defaults.json`)
-- [`reference/defaults.example.json`](./reference/defaults.example.json) — a filled defaults example
+- [`reference/preferences.schema.json`](./reference/preferences.schema.json) — the user-preferences contract (`~/.claude/crew/preferences.json`)
+- [`reference/preferences.example.json`](./reference/preferences.example.json) — a filled preferences example
 - [`reference/presets.json`](./reference/presets.json) — the shipped persona skins
 - [`reference/PRINCIPLES.md`](./reference/PRINCIPLES.md) — the design principles the crew is built on
 - [`reference/routing.md`](./reference/routing.md) — which skill/role for which situation

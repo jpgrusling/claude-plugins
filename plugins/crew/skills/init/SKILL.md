@@ -7,11 +7,14 @@ description: "Set up crew for a project: detect the toolchain, confirm it with y
 
 Run once per project. Produces a committed `.crew/profile.json` (+ `architecture.md`) that teaches the flow how *this* repo works. Re-run whenever the toolchain changes.
 
-## 0 · Load user defaults (if any)
+## 0 · Load user preferences (if any)
 
-Read `~/.claude/crew/defaults.json` if it exists (validate against `${CLAUDE_PLUGIN_ROOT}/reference/defaults.schema.json`). It holds the user's standing preferences — `models`, `personas`, `visualQA.tool`, `planDir`, `conventions.docRef`, extra `permissions.allow`. Use it to **pre-fill** the interview so you only ask about what it doesn't cover.
+Read `~/.claude/crew/preferences.json` if it exists (validate against `${CLAUDE_PLUGIN_ROOT}/reference/preferences.schema.json`). It holds two kinds of field:
 
-**Precedence, highest first:** an existing project `.crew/profile.json` > detected values (step 1) > these user defaults > plugin defaults (the schema). Never let a user default silently override something the detector found with high confidence — reconcile and confirm if they disagree. If no defaults file exists, mention once that the user can set these up with `/crew:defaults` (or hand-write from `${CLAUDE_PLUGIN_ROOT}/reference/defaults.example.json`) to carry choices across projects, then continue.
+- **Live** (`models`, `personas`, `visualQA.tool`) — the foreman resolves these at runtime; **init does not persist them into the profile.** You only touch them here if the user wants to *pin* one for the whole project (steps 2–3).
+- **Seed** (`planDir`, `conventions.docRef`/`notes`, `permissions.allow`) — use these to **pre-fill** the interview so you only ask about what they don't cover; these *are* written into the committed profile.
+
+**Precedence for seed fields, highest first:** an existing project `.crew/profile.json` > detected values (step 1) > these preferences > plugin defaults (the schema). Never let a preference silently override something the detector found with high confidence — reconcile and confirm if they disagree. If no preferences file exists, mention once that the user can set standing choices (skin, model tier, visual-QA tool) with `/crew:preferences` so they don't re-enter them per project, then continue.
 
 ## 1 · Detect (mechanical, read-only)
 
@@ -29,21 +32,24 @@ Batch-confirm the high-confidence values; interrogate everything in `needsConfir
 
 - **Gates** — exact lint / format / format-write / typecheck / build / test commands. Blank = not available; note it and move on.
 - **Conventions** — house rules the crew must follow (classname helper, comment style, breakpoints, design-token rules…). Offer to read an in-repo doc (`AGENTS.md` / `CLAUDE.md`) and record it as `conventions.docRef` + a short `notes` summary.
-- **Visual QA** — is there a Storybook/dev server to check against, how is it started, is Playwright available? (`tool: none` if not.)
+- **Visual QA** — detect the project fact: is there a Storybook/dev server to check against, and how is it started? Persist `visualQA.target` + `startCommand` in the profile. The **tool** (`playwright`/`none`) is a live preference, not a project fact — don't persist it unless pinning. If you detect a target but the user's preferences set no tool, suggest they set it via `/crew:preferences` (resolved default is `none`, i.e. no visual QA). Pin `visualQA.tool` in the profile only if the project must force one for everyone.
 - **Design source** — `figma` / `tickets` / `none`.
 - **Codegen** — does changing the API need a regen step? the command + any prerequisite (e.g. a backend must be running first).
-- **Models** — per-role tier. Propose the default tiering: the **strong** tier for every role except the scout — including `surveyor` and `inspector`, which are judgment roles (a weak survey poisons the plan; a weak gate caps build quality). Only `scout` (bounded, external, returns a cited brief) defaults to `claude-sonnet-5` to cut cost. Skip if the user's defaults already set it; confirm rather than assume.
+- **Models** — per-role tier is a **live preference**, resolved from the user's `preferences.json` at runtime, so **don't persist `models` into the profile** by default. Write a `models` block into the profile only if the user wants to *pin* a tier for the whole project (e.g. force a strong builder regardless of who runs it) — ask, don't assume. If they have no model preference set at all, point them at `/crew:preferences`; the plugin default is strong-everywhere-except-`scout` (surveyor and inspector are judgment roles).
 - **Plan dir** — default `.crew/plans`; if the repo already uses one (e.g. `.agents/plans`), offer to reuse it.
 
 ## 3 · Persona skin
 
-Offer the shipped presets, or let the user enter their own names, or keep defaults:
+The persona skin is a **live preference**: the foreman resolves it from the user's `preferences.json` on every run, so it normally does **not** go in the repo. **Ask which the project wants:**
+
+- **Keep it personal (default).** If the user has a skin in their preferences it just applies — nothing to write here. If they don't and want one, point them at `/crew:preferences`; the plugin default is the functional names.
+- **Pin it to the repo (prescriptive).** If the project should pin a skin so everyone who runs the crew here narrates the same names, offer the shipped presets or custom names and write a `personas` block (all ten roles) into the profile; that pin then wins over each person's preference. Otherwise leave `personas` out of the profile entirely.
 
 ```bash
 cat "${CLAUDE_PLUGIN_ROOT}/reference/presets.json"
 ```
 
-Shipped presets are trademark-safe. The user can name the crew anything they like — custom names live only in their `profile.json`, never in the plugin. If the user's defaults set a skin, use it unless they want to change it here. Record all ten names (foreman, surveyor, builder, inspector, diagnostician, scout, reviewer, tester, architect, auditor) under `personas`.
+Shipped presets are trademark-safe; custom names live only in the user's files, never in the plugin.
 
 ## 4 · Architecture map
 
@@ -57,7 +63,7 @@ Record that SHA as `architectureMap.generatedAtSha`. (The surveyor refreshes sta
 
 ## 5 · Persist
 
-Write `.crew/profile.json` (validate against `${CLAUDE_PLUGIN_ROOT}/reference/profile.schema.json`) and `.crew/architecture.md`. Show the user the final profile and offer to commit both.
+Write `.crew/profile.json` (validate against `${CLAUDE_PLUGIN_ROOT}/reference/profile.schema.json`) and `.crew/architecture.md`. The profile holds **project facts** — `trunk`, `gates`, `protected`, `packageManager`, `codegen`, `visualQA.target`/`startCommand`, `designSource`, `conventions`, `planDir`, `architectureMap`. **Omit `models`, `personas`, and `visualQA.tool` unless the user chose to pin them** (steps 2–3) — those resolve from preferences at runtime. Show the user the final profile and offer to commit both.
 
 ## 6 · Permissions
 
@@ -82,7 +88,7 @@ A plugin can't ship permission grants, so the flow will otherwise prompt on Play
 }
 ```
 
-Skip the Playwright entries if `visualQA.tool` is `none`. The Playwright tool names assume a Playwright MCP is installed in the host; adjust to match the host's server if it differs. Append any entries from the user defaults' `permissions.allow` on top of this baseline.
+Skip the Playwright entries if the resolved visual-QA tool is `none` (no `playwright` pin in the profile and none in the user's preferences). The Playwright tool names assume a Playwright MCP is installed in the host; adjust to match the host's server if it differs. Append any entries from the user's `preferences.permissions.allow` on top of this baseline.
 
 **Keep this allow-list read-only.** It's the enforcement layer for the read-only crew members: because mutating shell commands (`git push`, `rm`, `git checkout .`) are *not* on it, a read-only agent that strays into one surfaces a prompt to you instead of running silently. Don't add write/push/merge commands here — the builder mutates inside its own isolated worktree, and the foreman handles integration with your explicit go-ahead.
 

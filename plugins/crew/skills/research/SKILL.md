@@ -13,7 +13,7 @@ Pin down what's actually being asked before dispatching. If it's vague or sprawl
 
 ## 2 · Dispatch the Scout
 
-Dispatch the `scout` agent with the scoped question and any context (target library + version, what the answer will inform). If a `.crew/profile.json` exists, apply its `models.scout` override and persona name; otherwise the Scout runs on the session model as `Scout`. The Scout is read-only and external — it won't touch the repo.
+Dispatch the `scout` agent with the scoped question and any context (target library + version, what the answer will inform). Resolve the scout's model and persona — a `.crew/profile.json` pin wins, else your `~/.claude/crew/preferences.json`, else the plugin default (`claude-sonnet-5`, narrated as `Scout`); your preferences apply even with no profile open. The Scout is read-only and external — it won't touch the repo.
 
 ## 3 · Relay the brief
 

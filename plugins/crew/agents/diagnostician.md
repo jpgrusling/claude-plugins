@@ -29,7 +29,7 @@ Your instrumentation must not survive. Before reporting, revert the worktree to 
 
 ## Dispatching the Scout
 
-When a hypothesis hinges on **external** knowledge — is this a known bug in a dependency's changelog/issues, did a version bump change this behavior — you may dispatch the `scout` agent inline for a tight lookup, applying the profile's `models.scout` and persona. Use its cited brief as evidence; it never substitutes for reproducing the fault yourself in the worktree.
+When a hypothesis hinges on **external** knowledge — is this a known bug in a dependency's changelog/issues, did a version bump change this behavior — you may dispatch the `scout` agent inline for a tight lookup, applying the scout model and persona the foreman passed you (or the default if none). Use its cited brief as evidence; it never substitutes for reproducing the fault yourself in the worktree.
 
 ## Rules
 

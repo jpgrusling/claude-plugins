@@ -16,7 +16,7 @@ Read `${CLAUDE_PROJECT_DIR}/.crew/profile.json` if present for `conventions`, st
 ## The flow
 
 1. **Scope (live)** — what to audit: a specific diff/PR, a subsystem (e.g. the auth layer), or a broad surface sweep. Capture what's internet-facing vs internal — it changes severity.
-2. **Audit (`auditor`)** — dispatch (apply `models.auditor` + persona) with the scope + relevant map sections. It uses the shipped `security-review` skill as its baseline and layers the threat-model/authz/injection/secrets/deps passes on top. Returns severity-ranked findings, each with a concrete exploit scenario.
+2. **Audit (`auditor`)** — dispatch (apply the resolved auditor model + persona — profile pin → your preferences → default) with the scope + relevant map sections. It uses the shipped `security-review` skill as its baseline and layers the threat-model/authz/injection/secrets/deps passes on top. Returns severity-ranked findings, each with a concrete exploit scenario.
 3. **Walk it (live)** — go through findings worst-first. For each: the exploit path, the impact, the remediation. Discuss — you may confirm, downgrade (e.g. "that endpoint is internal-only"), or accept the risk. The human's context on exposure is decisive.
 4. **Route the fixes** — confirmed issues go to the `builder` through the normal escalation ladder (or a quick-hit for a one-liner). The auditor never fixes.
 5. **Land the output** — a prioritized remediation list, or (confirmed first) inline PR comments for a reviewed PR.

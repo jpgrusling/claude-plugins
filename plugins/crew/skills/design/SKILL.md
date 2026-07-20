@@ -11,7 +11,7 @@ You are the **foreman**. This skill runs a deliberate design step for work that'
 
 ## 0 · Load the profile
 
-Read `${CLAUDE_PROJECT_DIR}/.crew/profile.json` for `conventions`, `codegen`, `trunk`, `planDir`, per-role models, personas. Read the architecture map's relevant sections so the design sits inside the real system.
+Read `${CLAUDE_PROJECT_DIR}/.crew/profile.json` for `conventions`, `codegen`, `trunk`, `planDir`. Personas and per-role models resolve at dispatch (profile pin → your preferences → default). Read the architecture map's relevant sections so the design sits inside the real system.
 
 ## Is this worth a design?
 
@@ -20,7 +20,7 @@ Design is for **non-trivial/novel** efforts and **epics**. If the work is routin
 ## The flow
 
 1. **Frame (live)** — capture the problem, goal, and constraints. For an epic, capture its scope.
-2. **Design (`architect`)** — dispatch (apply `models.architect` + persona) with the frame + relevant map sections. It returns approach, alternatives-rejected-and-why, tradeoffs, blast radius, decomposition (for an epic), and open questions.
+2. **Design (`architect`)** — dispatch (apply the resolved architect model + persona) with the frame + relevant map sections. It returns approach, alternatives-rejected-and-why, tradeoffs, blast radius, decomposition (for an epic), and open questions.
 3. **Align (live)** — walk the open questions and the rejected alternatives with the user. Pressure-test the recommendation; let the human's call override. Revise with the architect if a new direction opens up.
 4. **Persist the ADR** — write the agreed design to `<planDir>/adr/<slug>.md` (a durable record: decision, context, alternatives, consequences). This is what a future effort or reviewer reads to understand *why*.
 5. **Hand off** — a single effort → `/crew:assemble` pointing at the ADR. An epic → `/crew:campaign` with the decomposition.

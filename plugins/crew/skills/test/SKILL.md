@@ -17,7 +17,7 @@ Read `${CLAUDE_PROJECT_DIR}/.crew/profile.json`. **If it's missing, stop** and o
 2. **Worktree** — the tester works in a worktree you provide:
    - **Standalone** — provision one for the target branch (a test-only effort that goes through integration like any other).
    - **Inside `assemble`** — hand it the **builder's** worktree path so tests land on the same branch as the code.
-3. **Dispatch the `tester`** (apply `models.tester` + persona) at the worktree with the scope. It designs a strategy, writes the coverage, does the adversarial edge-case pass, and runs `gates.test`.
+3. **Dispatch the `tester`** (apply the resolved tester model + persona — profile pin → your preferences → default) at the worktree with the scope. It designs a strategy, writes the coverage, does the adversarial edge-case pass, and runs `gates.test`.
 4. **Triage the report.** New passing tests → good. A test that fails because the **feature is wrong** is a finding: route it to the `builder` through the normal escalation ladder — the tester does not fix feature source.
 5. **Integration (you, on explicit go-ahead)** — same ritual as `assemble`: confirm merge strategy, no protected files, merge, **push is pause-and-confirm**, clean up the worktree.
 

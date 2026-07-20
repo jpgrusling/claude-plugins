@@ -1,5 +1,5 @@
 {
-  "$comment": "Trademark-safe persona skins shipped with the plugin. Each maps the ten persona-bearing roles to display names used in narration (the campaign skill has no persona). Bring your own skin by setting `personas` directly in .crew/profile.json (or ~/.claude/crew/defaults.json to reuse it across projects) — custom names live only in your files and are never distributed by this plugin.",
+  "$comment": "Trademark-safe persona skins shipped with the plugin. Each maps the ten persona-bearing roles to display names used in narration (the campaign skill has no persona). Bring your own skin by setting `personas` in ~/.claude/crew/preferences.json (your default everywhere), or pin it in a project's .crew/profile.json — custom names live only in your files and are never distributed by this plugin.",
   "default": {
     "foreman": "Foreman",
     "surveyor": "Surveyor",
