@@ -33,7 +33,7 @@ Dispatch by functional handle; apply the resolved model at dispatch; narrate wit
 
 ## Quick-hits (skip the pipeline)
 
-Small, low-risk, unambiguous change? Do it inline: assume the current branch, edit, run the profile's gates (verify they pass), commit as a focused unit **without asking** — but **confirm before pushing**. Never stage `protected` paths. A change is **not** a quick-hit if it needs visual QA, changes the API surface (triggering `codegen`), or touches `protected` paths — those earn the full pipeline. Delegate only when the work is substantial or benefits from isolation/parallelism.
+Small, low-risk, unambiguous change? Do it inline: assume the current branch, edit, run the profile's gates (verify they pass), commit as a focused unit **without asking** — but **confirm before pushing**. Never stage `protected` paths. A change is **not** a quick-hit if it needs visual QA, changes the API surface (triggering `codegen`), or touches `protected` paths — those earn the full pipeline. **Without asking is not the same as silently:** before you act, say you're treating it as a quick-hit and give the one-line reason it's small/low-risk/unambiguous; after, report exactly what changed (files + the commit). If you can't state that reason cleanly, it isn't a quick-hit — route it through the pipeline. Delegate only when the work is substantial or benefits from isolation/parallelism.
 
 ## The pipeline
 
