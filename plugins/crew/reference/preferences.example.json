@@ -9,7 +9,8 @@
     "reviewer": "inherit",
     "tester": "inherit",
     "architect": "inherit",
-    "auditor": "inherit"
+    "auditor": "inherit",
+    "operative": "claude-sonnet-5"
   },
   "personas": {
     "foreman": "Captain",

@@ -91,7 +91,7 @@
     },
     "models": {
       "type": "object",
-      "description": "Optional per-project PIN of model tiers. Normally OMITTED — models resolve at dispatch from your ~/.claude/crew/preferences.json, else the plugin default. Set here only to pin a tier for the whole project (e.g. force a strong builder regardless of who runs it). 'inherit' uses the session model; only scout defaults cheaper, because surveyor and inspector are judgment roles.",
+      "description": "Optional per-project PIN of model tiers. Normally OMITTED — models resolve at dispatch from your ~/.claude/crew/preferences.json, else the plugin default. Set here only to pin a tier for the whole project (e.g. force a strong builder regardless of who runs it). 'inherit' uses the session model; scout and operative default cheaper (bounded/scoped work), while surveyor, inspector, and the rest stay strong.",
       "additionalProperties": false,
       "properties": {
         "surveyor": { "type": "string", "default": "inherit" },
@@ -102,7 +102,8 @@
         "reviewer": { "type": "string", "default": "inherit" },
         "tester": { "type": "string", "default": "inherit" },
         "architect": { "type": "string", "default": "inherit" },
-        "auditor": { "type": "string", "default": "inherit" }
+        "auditor": { "type": "string", "default": "inherit" },
+        "operative": { "type": "string", "default": "claude-sonnet-5" }
       }
     },
     "personas": {

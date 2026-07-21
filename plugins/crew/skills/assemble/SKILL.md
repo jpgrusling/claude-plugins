@@ -22,6 +22,7 @@ Dispatch by functional handle; apply the resolved model at dispatch; narrate wit
 | Foreman | this skill | main session |
 | Surveyor | `surveyor` | none (read-only) |
 | Builder | `builder` | worktree |
+| Operative | `operative` | current branch (no worktree) — dispatched, serialized solo ops |
 | Inspector | `inspector` | reads the worktree |
 | Scout | `scout` | none (read-only, external) — on-demand, not a pipeline stage |
 | Tester | `tester` | works in the builder's worktree — optional coverage pass |
@@ -31,9 +32,17 @@ Dispatch by functional handle; apply the resolved model at dispatch; narrate wit
 
 **Optional passes.** For an effort where coverage matters, dispatch the `tester` at the builder's worktree after build for an adversarial test pass (see `/crew:test`); route any product-bug findings back through the ladder. For a security-sensitive effort, dispatch the `auditor` (see `/crew:audit`). Both are optional — reach for them when the effort warrants, not by default. Dedicated design (`/crew:design`) and multi-effort orchestration (`/crew:campaign`) live in their own skills.
 
-## Quick-hits (skip the pipeline)
+## Quick-hits — solo ops (skip the pipeline)
 
-Small, low-risk, unambiguous change? Do it inline: assume the current branch, edit, run the profile's gates (verify they pass), commit as a focused unit **without asking** — but **confirm before pushing**. Never stage `protected` paths. A change is **not** a quick-hit if it needs visual QA, changes the API surface (triggering `codegen`), or touches `protected` paths — those earn the full pipeline. **Without asking is not the same as silently:** before you act, say you're treating it as a quick-hit and give the one-line reason it's small/low-risk/unambiguous; after, report exactly what changed (files + the commit). If you can't state that reason cleanly, it isn't a quick-hit — route it through the pipeline. Delegate only when the work is substantial or benefits from isolation/parallelism.
+Small, low-risk, unambiguous change? It's a **solo op** — no survey, no worktree, no inspector.
+
+**Default: dispatch the `operative` in the background.** Hand it the scoped change (apply the resolved `operative` model + the builder's persona — it's the same hero, working solo) and immediately return to the human for the next item. The operative works the current branch, runs the gates, commits on green, never pushes, and reports its classification + diff. Staying free while small work happens is the whole point of the fast path.
+
+**Serialize main-tree work.** Never let two solo ops — or a solo op and any other current-working-tree mutation — run at once; queue them and dispatch one at a time. They *may* run alongside a full pipeline build, which is isolated in its own worktree.
+
+**Inline fallback.** For something instant when the human is clearly waiting, do it yourself inline instead of dispatching — same rules (gates green, commit, never push).
+
+**Guardrails (either path).** A change is **not** a solo op if it needs visual QA, changes the API surface (triggering `codegen`), or touches `protected` paths — those earn the full pipeline. Never stage `protected` paths. Committing to the current branch (even the trunk) is fine — it's local; **pushing is always pause-and-confirm.** The work is never silent: the classification (one-line reason it qualified) and the diff are always surfaced to the human. If it can't be justified cleanly — or the operative hands it back as scope-crept — route it through the pipeline.
 
 ## The pipeline
 

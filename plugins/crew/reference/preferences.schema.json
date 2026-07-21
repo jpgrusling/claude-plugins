@@ -13,7 +13,7 @@
     },
     "models": {
       "type": "object",
-      "description": "LIVE. Your standing per-role model tier, resolved at dispatch (profile pin > these > plugin default). Never persisted into a repo profile unless a project pins it. 'inherit' uses the session model. Only scout defaults to a cheaper tier; surveyor and inspector are judgment roles and stay strong.",
+      "description": "LIVE. Your standing per-role model tier, resolved at dispatch (profile pin > these > plugin default). Never persisted into a repo profile unless a project pins it. 'inherit' uses the session model. Scout and operative default to a cheaper tier (bounded/scoped work); surveyor, inspector, and the rest are judgment roles and stay strong.",
       "additionalProperties": false,
       "properties": {
         "surveyor": { "type": "string", "default": "inherit" },
@@ -24,7 +24,8 @@
         "reviewer": { "type": "string", "default": "inherit" },
         "tester": { "type": "string", "default": "inherit" },
         "architect": { "type": "string", "default": "inherit" },
-        "auditor": { "type": "string", "default": "inherit" }
+        "auditor": { "type": "string", "default": "inherit" },
+        "operative": { "type": "string", "default": "claude-sonnet-5" }
       }
     },
     "personas": {

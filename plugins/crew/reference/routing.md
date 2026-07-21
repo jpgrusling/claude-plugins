@@ -39,10 +39,11 @@ Rules of thumb:
 - **Surveyor vs architect:** surveyor recons *what is*; architect designs *what should be*. Routine work skips the architect.
 - **Auditor vs reviewer:** the reviewer's correctness lens may brush security, but the auditor is the dedicated attacker's-eye pass — reach for it on security-sensitive surface, not by default.
 
-## The two mutating roles
+## The mutating roles
 
 | Role | Isolation | Mutates |
 | --- | --- | --- |
-| **Builder** | its own worktree | product code — the only role that ships a fix |
+| **Builder** | its own worktree | product code for a full effort — routed through the QA loop |
+| **Operative** | the current branch (no worktree) | small scoped solo ops (quick-hits) — dispatched non-blocking and serialized; runs gates, no inspector; narrated as the builder |
 | **Diagnostician** | its own worktree | *throwaway* instrumentation only, discarded before reporting (may leave a flagged repro test) |
 | **Tester** | the worktree it's given (usually the builder's) | test files only — never feature source |

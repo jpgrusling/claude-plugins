@@ -46,7 +46,7 @@ Drop a design or ticket link. The foreman runs the pipeline:
 5. **Manual QA** — final acceptance with you.
 6. **Integrate** — the foreman recommends a merge strategy, confirms, merges into your trunk, and cleans up. Pushing is always confirmed with you.
 
-Small, unambiguous changes skip the pipeline — the foreman does them inline as a **quick-hit** (commits without asking; still confirms before pushing).
+Small, unambiguous changes skip the pipeline as a **solo op** — the foreman dispatches the `operative` in the background (or handles it inline) so it can keep taking your next item; it runs your gates and commits to the current branch, never pushes, and reports what it changed. Pushing is always confirmed.
 
 ## Debug a complex bug
 
@@ -87,7 +87,7 @@ An **interactive** review of a colleague's PR or diff — correctness, style, ar
 
 ## The crew (and skins)
 
-Agents are `surveyor`, `builder`, `inspector`, `diagnostician`, `scout`, `reviewer`, `tester`, `architect`, `auditor` (functional names = invocation handles). The Scout is external read-only recon; the Reviewer critiques others' code for a human author; the Tester authors coverage; the Architect designs before building; the Auditor is a security lens. Their **display names** are skinnable: set a skin in your `~/.claude/crew/preferences.json` (applies everywhere), or **pin** one in a project's `.crew/profile.json` to standardize it for the team. Pick a shipped preset or name them anything; shipped presets are trademark-safe, custom names live only in your files.
+Agents are `surveyor`, `builder`, `inspector`, `diagnostician`, `scout`, `reviewer`, `tester`, `architect`, `auditor`, `operative` (functional names = invocation handles). The Scout is external read-only recon; the Reviewer critiques others' code for a human author; the Tester authors coverage; the Architect designs before building; the Auditor is a security lens; the Operative runs small solo ops (quick-hits), dispatched non-blocking and narrated as the builder. Their **display names** are skinnable: set a skin in your `~/.claude/crew/preferences.json` (applies everywhere), or **pin** one in a project's `.crew/profile.json` to standardize it for the team. Pick a shipped preset or name them anything; shipped presets are trademark-safe, custom names live only in your files.
 
 ```json
 "personas": { "foreman": "Athena", "surveyor": "Hermes", "builder": "Hephaestus", "inspector": "Themis", "diagnostician": "Asclepius", "scout": "Metis", "reviewer": "Mentor", "tester": "Argus", "architect": "Daedalus", "auditor": "Cassandra" }
