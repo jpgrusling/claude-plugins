@@ -19,6 +19,7 @@ Which skill to reach for, and which role does the work. The crew has nine agents
 | A heavyweight, multi-source investigation | `deep-research` skill | (hand off — bigger than the scout) |
 | Toolchain setup for a new repo | `/crew:init` | detect → confirm → write the profile + map |
 | Standing preferences (skin, model tier, visual-QA tool) | `/crew:preferences` | live prefs the foreman resolves each run; init also seeds planDir/conventions/permissions |
+| Pin your skin/tiers to a repo for the team, or refresh a repo's seeds | `/crew:preferences` (sync mode) | pin/unpin the live fields in `.crew/profile.json`, or re-seed planDir/conventions/permissions from your preferences — no re-detect |
 | A stale architecture map | `/crew:resync` | surveyor rebuilds the whole map |
 
 ## The read-only analyst roles — how they differ

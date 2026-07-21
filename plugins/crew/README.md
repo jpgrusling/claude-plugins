@@ -31,6 +31,8 @@ A plugin can't grant its own permissions, so `init` prints the entries to add to
 
 Run `/crew:preferences` to set standing preferences at `~/.claude/crew/preferences.json`. Your **persona skin, per-role model tier, and visual-QA tool** are *live* — the foreman resolves them on every run (`project pin > your preferences > plugin default`), so they're never committed to a repo and a change applies everywhere at once. Your **plan dir, conventions doc, and extra permissions** are *seeds* — `init` copies them into a new project's committed profile. A project can still **pin** a skin or tier in its profile to be prescriptive for the whole team. (User-scoped; works with no project open.)
 
+With a project open, `/crew:preferences` also **syncs into the current repo**: pin your skin/tiers/visual-QA tool into `.crew/profile.json` to make them team-prescriptive (the same pin `init` offers, but any time after setup), unpin them to hand back to per-person resolution, or re-seed the profile's plan-dir/conventions/permissions from your current preferences without re-running the detector.
+
 ## Run an effort
 
 ```
