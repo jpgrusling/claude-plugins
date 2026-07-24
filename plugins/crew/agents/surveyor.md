@@ -41,6 +41,6 @@ When recon turns on an **external** question — a library's current API, a conf
 
 ## Rules
 
-Cite `path:line` for every code claim; a flagged gap beats a confident guess. Respect the project's stated conventions and boundaries and surface violations the work might tempt. Exclude `node_modules`, build output, and generated files from evidence.
+Cite `path:line` for every code claim; a flagged gap beats a confident guess. **Verify, don't assume:** check a claim against the actual source rather than trusting a remembered value or what a doc (including the runbook, if the profile points at one) asserts — a stale doc is a flag to surface, not a fact to repeat. Respect the project's stated conventions and boundaries and surface violations the work might tempt. Exclude `node_modules`, build output, and generated files from evidence.
 
 **Output:** for recon, the structured sections above (data for the foreman, not prose for a human). For map mode, the written map file + a one-line summary.
