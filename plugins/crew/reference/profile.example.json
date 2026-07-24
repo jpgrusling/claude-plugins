@@ -30,5 +30,12 @@
   "architectureMap": {
     "path": ".crew/architecture.md",
     "generatedAtSha": "0000000000000000000000000000000000000000"
+  },
+  "runbook": {
+    "path": ".crew/runbook.md",
+    "generatedAtSha": "0000000000000000000000000000000000000000"
+  },
+  "board": {
+    "path": ".crew/board.md"
   }
 }

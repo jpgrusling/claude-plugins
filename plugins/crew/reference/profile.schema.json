@@ -131,6 +131,23 @@
         "path": { "type": "string", "default": ".crew/architecture.md" },
         "generatedAtSha": { "type": "string" }
       }
+    },
+    "runbook": {
+      "type": "object",
+      "description": "Crew-authored operational ground truth for this project — how it runs, verifies, and behaves — and the commit it was last curated at (for staleness checks). The crew consults it and curates it over time; `init` scaffolds it empty. Optional; a profile without it stays valid.",
+      "additionalProperties": false,
+      "properties": {
+        "path": { "type": "string", "default": ".crew/runbook.md" },
+        "generatedAtSha": { "type": "string" }
+      }
+    },
+    "board": {
+      "type": "object",
+      "description": "The foreman's live orchestration state, kept outside volatile context so it survives a compaction. Rewritten as work progresses, so it carries no staleness sha. Optional; a profile without it stays valid.",
+      "additionalProperties": false,
+      "properties": {
+        "path": { "type": "string", "default": ".crew/board.md" }
+      }
     }
   }
 }
