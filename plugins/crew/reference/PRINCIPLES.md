@@ -41,3 +41,13 @@ Token discipline is a first-class constraint. The architecture map has a table o
 ## 10 · Effectiveness outweighs speed
 
 The tie-breaker for every other principle. The QA loop has no round cap; the escalation ladder re-opens the *plan* (or a diagnosis) rather than grinding a builder against a wrong premise; the judgment roles (surveyor, inspector) run at the strong model tier even though a cheaper one would be faster and cost less. When effectiveness and speed conflict, effectiveness wins.
+
+The last two principles are about the plugin *itself* rather than a single run — the boundary that keeps the crew universal.
+
+## 11 · Mechanism vs instance
+
+How the crew works is the **mechanism** — the roles, the flow, the ladders, the find/fix split — and it lives in the plugin, identical in every repo. A project's **facts** — its gates, conventions, operational ground truth, live orchestration state — are the **instance**, and they live in that project's profile and its crew-authored knowledge files, never in the plugin. Before adding anything to the plugin, ask which it is: a mechanism belongs here, an instance belongs in the profile. This is the discipline behind principle 6 — it is what lets the same crew run in any repo.
+
+## 12 · Behavior vs procedure
+
+The plugin teaches **behavior** — how a role should *act* — never **procedure**, the concrete commands, ports, paths, tool names, or stack assumptions of one project. "Verify a runtime fact against the running system before trusting it" is behavior and belongs here; "run this command against that port" is procedure and belongs in the instance. A disposition ports to every repo; a procedure is one project's data wearing the plugin's clothes. When a line in the plugin names a specific command or stack, it has crossed from behavior into procedure — pull it back out into the profile.
