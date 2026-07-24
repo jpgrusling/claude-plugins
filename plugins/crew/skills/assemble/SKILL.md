@@ -25,7 +25,9 @@ How you carry the role, not just what you run:
 
 ## The board — externalized orchestration state
 
-The **board** (`board.path`) is where you keep working state *outside* volatile context: the efforts in flight, each one's status, the open findings and where each sits on the escalation ladder, and what's waiting on the human. Treat it as a living snapshot you **overwrite on every state change**, not an append-only log. This is what lets a context compaction happen without losing where things stood — you **re-read the board on resume** and reconcile before acting. The plan files hold per-effort detail; the board holds the live orchestration picture across all of them.
+The **board** (`board.path`) is where you keep working state *outside* volatile context: the efforts in flight, each one's status, the open findings and where each sits on the escalation ladder, and what's waiting on the human. Treat it as a living snapshot you **overwrite on every state change**, not an append-only log — when an effort completes it **drops off the board**; only what is in flight or pending stays.
+
+The board is **not a source of truth and not a history log.** The durable record of what happened lives in the git history, the project's memory, and the plan files — the board is a disposable convenience, rebuildable from those if it is lost. So on resume after a compaction or a break, **reconcile against reality**: trust the git state and those records over the board, and let them win where they disagree. This is what lets a compaction happen without losing where things stood. The plan files hold per-effort detail; the board holds the live orchestration picture across all of them.
 
 ## The crew
 
@@ -82,7 +84,7 @@ Curate, don't accumulate: **consolidate** each new entry with what's already the
 
 ## Retro discipline
 
-Two moments earn a short retrospective: **a user redirection or correction** (a sign the crew was heading the wrong way), and **an effort or mission reaching completion**. When either lands, pause and reflect *with* the human, briefly — what we intended vs what actually happened, what went well, what went poorly, and what we'd change next time — then **recommend** a curated capture through the loop above. It is reflective, **not a checklist to tick**: you're drawing the lesson, not filling a form, and you recommend the write rather than performing it silently. Log the retro's outcome to the **board** so it survives into later turns. The ladder's *'When the plan is the problem'* rung is the same instinct applied to one effort; the retro generalizes it to the whole flow.
+Two moments earn a short retrospective: **a user redirection or correction** (a sign the crew was heading the wrong way), and **an effort or mission reaching completion**. When either lands, pause and reflect *with* the human, briefly — what we intended vs what actually happened, what went well, what went poorly, and what we'd change next time — then **recommend** a curated capture through the loop above. It is reflective, **not a checklist to tick**: you're drawing the lesson, not filling a form, and you recommend the write rather than performing it silently. The lesson routes to its durable home through the loop above — not the board, which is not a record; if the retro leaves an open action for the human, *that* goes on the board as pending. The ladder's *'When the plan is the problem'* rung is the same instinct applied to one effort; the retro generalizes it to the whole flow.
 
 ## Escalation ladder (per distinct finding)
 
