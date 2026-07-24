@@ -61,11 +61,20 @@ git rev-parse HEAD
 
 Record that SHA as `architectureMap.generatedAtSha`. (The surveyor refreshes stale slices per effort; `/crew:resync` regenerates the whole map.)
 
-## 5 · Persist
+## 5 · Operational-knowledge scaffolds
 
-Write `.crew/profile.json` (validate against `${CLAUDE_PLUGIN_ROOT}/reference/profile.schema.json`) and `.crew/architecture.md`. The profile holds **project facts** — `trunk`, `gates`, `protected`, `packageManager`, `codegen`, `visualQA.target`/`startCommand`, `designSource`, `conventions`, `planDir`, `architectureMap`. **Omit `models`, `personas`, and `visualQA.tool` unless the user chose to pin them** (steps 2–3) — those resolve from preferences at runtime. Show the user the final profile and offer to commit both.
+The crew learns as it works, and it needs somewhere durable to keep what it learns and where the foreman keeps its live state. Scaffold both **empty** now — framing headers only, **zero example content** — and write their pointers into the profile the same way you did the architecture map:
 
-## 6 · Permissions
+- **Runbook** (`.crew/runbook.md`, or the user's plan-dir convention) — the project's **operational ground truth**: how it runs, how you verify a change, and the gotchas worth remembering. Write a title, a one-line note that this is crew-authored operational ground truth curated over time, and a one-line curation rule (consolidate and correct in place; never blind-append; one durable fact per entry) — then leave it otherwise empty. Do **not** seed it with commands or steps; the crew fills it in as it discovers real facts. Stamp `runbook.generatedAtSha` to the current commit like the map.
+- **Board** (`.crew/board.md`) — the foreman's **live orchestration state**. Write a title and a one-line note that this is the foreman's live snapshot (rewritten as work progresses, not a log). Leave it otherwise empty. Record `board.path`; it takes no sha.
+
+If the project also wants a crew-authored conventions file (distinct from the `conventions.docRef` doc), you may scaffold one the same way — framing only, non-prescriptive — but don't force it.
+
+## 6 · Persist
+
+Write `.crew/profile.json` (validate against `${CLAUDE_PLUGIN_ROOT}/reference/profile.schema.json`) alongside `.crew/architecture.md`, `.crew/runbook.md`, and `.crew/board.md`. The profile holds **project facts** — `trunk`, `gates`, `protected`, `packageManager`, `codegen`, `visualQA.target`/`startCommand`, `designSource`, `conventions`, `planDir`, `architectureMap`, `runbook`, `board`. **Omit `models`, `personas`, and `visualQA.tool` unless the user chose to pin them** (steps 2–3) — those resolve from preferences at runtime. Show the user the final profile and offer to commit all of them.
+
+## 7 · Permissions
 
 A plugin can't ship permission grants, so the flow will otherwise prompt on Playwright and a couple of git reads. Print the entries to add to the repo's `.claude/settings.json`, and offer to append them yourself with the user's ok:
 
@@ -92,6 +101,6 @@ Skip the Playwright entries if the resolved visual-QA tool is `none` (no `playwr
 
 **Keep this allow-list read-only.** It's the enforcement layer for the read-only crew members: because mutating shell commands (`git push`, `rm`, `git checkout .`) are *not* on it, a read-only agent that strays into one surfaces a prompt to you instead of running silently. Don't add write/push/merge commands here — the builder mutates inside its own isolated worktree, and the foreman handles integration with your explicit go-ahead.
 
-## 7 · Done
+## 8 · Done
 
 Tell the user they can now run `/crew:assemble` with a design/ticket link.
