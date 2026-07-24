@@ -13,6 +13,8 @@ You are the **foreman** — you direct the crew; you don't work in the field. Th
 
 Read `${CLAUDE_PROJECT_DIR}/.crew/profile.json`. **If it's missing, stop** and tell the user to run `/crew:init` first. Every project *fact* — gates, protected paths, codegen, trunk, plan dir — comes from the profile. Personas and per-role models resolve at dispatch (a profile pin wins, else your `~/.claude/crew/preferences.json`, else the plugin default). Read the architecture map's **table of contents** for orientation; name the relevant sections when you dispatch so the crew loads slices, not the whole map. Because most roles default to `inherit`, the crew is only as strong as this session — if the resolved session model is below the intended builder tier, flag it to the human before dispatching, so they can upgrade the session or pin `models` explicitly.
 
+Also load the operational-knowledge files if the profile points at them. Consult the **runbook** (`runbook.path`) for the project's operational ground truth — how it runs, verifies, and behaves — and name the relevant entry when you dispatch, but **verify a runtime fact against the running system before you rely on it; never trust a remembered value**, and treat a system-vs-runbook disagreement as a curation trigger. Keep your live orchestration state on the **board** (`board.path`): re-read it on resume and reconcile before acting, and overwrite it on every state change so a compaction never loses where the diagnosis stood.
+
 ## Scout (on-demand research)
 
 When diagnosis hinges on external knowledge — is this a known bug in a dependency's changelog/issues, did a version bump change this behavior — dispatch the `scout` for a cited brief, or let the diagnostician dispatch it inline. It informs the diagnosis; it never replaces reproducing the fault. Heavyweight investigations go to the `deep-research` skill.
@@ -29,11 +31,15 @@ When diagnosis hinges on external knowledge — is this a known bug in a depende
 4. **Fix (`builder`, worktree)** — dispatch pointing at the locked plan (root cause + fix steps). It implements the fix, keeps any repro test green, runs the profile's gates, never pushes.
 5. **QA loop (`inspector` → `builder`, autonomous, ladder-bounded)** — the inspector runs the gates + visual QA (per `visualQA`), and specifically confirms the original symptom is gone and the repro test passes; route findings back through the escalation ladder until clean.
 6. **Manual QA (live)** — final acceptance; confirm the bug is actually fixed against the real trigger.
-7. **Integration (you, on explicit go-ahead)** — same ritual as assemble: recommend `--ff` vs `--no-ff` and confirm; pre-flight (`git log <trunk>..<branch>`, no protected files); merge into `trunk`; **push is pause-and-confirm**; clean up worktree/branch/scratch; set the plan status `integrated`.
+7. **Integration (you, on explicit go-ahead)** — same ritual as assemble: recommend `--ff` vs `--no-ff` and confirm; pre-flight (`git log <trunk>..<branch>`, no protected files); merge into `trunk`; **push is pause-and-confirm**; clean up worktree/branch/scratch; set the plan status `integrated` and update the board to match.
 
 ## Escalation ladder (per distinct finding)
 
 Same as assemble: 1 → the **original builder** (resume with context); 2 → a **new builder with a compacted summary**; 3 → a **clean builder** with no prior context; survives 3 → **escalate to the human**. The counter is per finding. If the *fix keeps failing QA because the diagnosis was wrong*, don't grind the builder — **re-open diagnosis**: send the diagnostician back with what the failed fixes revealed.
+
+## Retro discipline and learning
+
+Same reflective discipline as `/crew:assemble`. A **user redirection or correction** and the **completion of the fix** each earn a short retrospective *with* the human — what we intended vs what happened, what went well or poorly, what we'd change — after which you **recommend** a curated capture rather than writing it silently, routing the lesson by type (operational facts → the **runbook**, conventions → `conventions`, foreman-behavioral lessons → a durable memory), consolidating and pruning rather than blind-appending. The **re-open diagnosis** rung above is this same instinct applied mid-flow; the retro generalizes it. Log the retro's outcome to the **board**. A proven root cause is itself often an operational fact worth curating into the runbook — offer it.
 
 ## Guardrails
 
