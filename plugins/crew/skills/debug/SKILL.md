@@ -31,7 +31,7 @@ When diagnosis hinges on external knowledge — is this a known bug in a depende
 4. **Fix (`builder`, worktree)** — dispatch pointing at the locked plan (root cause + fix steps). It implements the fix, keeps any repro test green, runs the profile's gates, never pushes.
 5. **QA loop (`inspector` → `builder`, autonomous, ladder-bounded)** — the inspector runs the gates + visual QA (per `visualQA`), and specifically confirms the original symptom is gone and the repro test passes; route findings back through the escalation ladder until clean.
 6. **Manual QA (live)** — final acceptance; confirm the bug is actually fixed against the real trigger.
-7. **Integration (you, on explicit go-ahead)** — same ritual as assemble: recommend `--ff` vs `--no-ff` and confirm; pre-flight (`git log <trunk>..<branch>`, no protected files); merge into `trunk`; **push is pause-and-confirm**; clean up worktree/branch/scratch; set the plan status `integrated` and update the board to match.
+7. **Integration (you, on explicit go-ahead)** — same ritual as assemble: recommend `--ff` vs `--no-ff` and confirm; pre-flight (`git log <trunk>..<branch>`, no protected files); merge into `trunk`; **push is pause-and-confirm**; clean up worktree/branch/scratch; set the plan status `integrated`, then **remove the effort's entry from the board entirely** (record lives in the plan file + git history — no "done"/"shipped" note left behind; see assemble's board rules).
 
 ## Escalation ladder (per distinct finding)
 
